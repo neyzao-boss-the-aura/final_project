@@ -4,13 +4,14 @@ from sqlalchemy.exc import SQLAlchemyError
 from banco_dados import tabela_cadastro, tabela_equipamentos, tabela_servico, tabela_recurso
 from database import *
 from datetime import datetime
+from templates import *
 
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
-@app.route("/")
-def home():
-    return render_template("novo_cadastro.html")
+@app.route("/", methods=["GET", "POST"])
+def inicio():
+    return render_template("inicio.html")
 
 @app.route("/cadastros", methods=["GET", "POST"])
 def listar_cadastros():
@@ -19,18 +20,18 @@ def listar_cadastros():
 
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
-    novo_equipamento = tabela_equipamentos.select_todos()
+    novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
     return render_template("novo_equipamento.html", novo_equipamento=novo_equipamento)
 
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
-    novo_recurso = tabela_recurso.select_todos()
+    novo_recurso = tabela_recurso.select_todos_recursos()
     return render_template("novo_recurso.html", novo_recurso=novo_recurso)
 
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
-    ordem_servico = tabela_servico.select_todos()
-    return render_template("listar_ordem_servicos.html", ordem_servico=ordem_servico)
+    nova_ordem_servicos = tabela_servico.select_todos_ordem()
+    return render_template("listar_ordem_servicos.html", nova_ordem_servicos=nova_ordem_servicos)
 
 @app.route("/cadastro/novo", methods=["GET", "POST"])
 def novo_cadastro():
@@ -68,14 +69,14 @@ def novo_cadastro():
 def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
-        cliente = request.form.get("cliente", "").strip()
+        usuario = request.form.get("cliente", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
         nota_cliente = request.form.get("nota_cliente", "").strip()
 
         if not nome:
             flash('Por favor, insira o nome do equipamento', 'error')
             return redirect(url_for("novo_equipamento"))
-        if not cliente:
+        if not usuario:
             flash('Por favor, insira o seu nome', 'error')
             return redirect(url_for("novo_equipamento"))
         if not quantidade:
@@ -85,10 +86,10 @@ def novo_equipamento():
             flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
             return redirect(url_for("novo_equipamento"))
 
-        tabela_equipamentos.salvar(nome=nome, cliente=cliente, quantidade=quantidade, nota_cliente=nota_cliente)
+        tabela_equipamentos.salvar(nome=nome, usuario=usuario, quantidade=quantidade, nota_cliente=nota_cliente)
         return redirect(url_for("novo_equipamento"))
 
-    equipamentos = tabela_equipamentos.select_todos()
+    equipamentos = tabela_equipamentos.select_todos_equipamentos()
     print(equipamentos)
     return render_template("listar_equipamentos.html", equipamentos=equipamentos)
 
@@ -113,10 +114,10 @@ def novo_recurso():
             flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
             return redirect(url_for("novo_recurso"))
 
-        tabela_recurso.salvar_recurso(nome=nome, responsavel=responsavel, equipamento=equipamento, descricao=descricao)
+        tabela_recurso.salvar(nome=nome, responsavel=responsavel, equipamento=equipamento, descricao=descricao)
         return redirect(url_for("novo_recurso"))
 
-    recursos = tabela_recurso.select_todos()
+    recursos = tabela_recurso.select_todos_recursos()
     print(recursos)
     return render_template("listar_recursos.html", novo_recurso=novo_recurso)
 
@@ -161,10 +162,10 @@ def nova_ordem_servicos():
             flash('Digite a descrição da OS', 'error')
             return redirect(url_for("nova_ordem_servicos"))
 
-        tabela_servico.salvar_ordem(cliente=cliente, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
+        tabela_servico.salvar(cliente=cliente, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         return redirect(url_for("nova_ordem_servicos"))
 
-    nova_ordem_servicos = tabela_servico.select_todos()
+    nova_ordem_servicos = tabela_servico.select_todos_ordem()
     print(nova_ordem_servicos)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
 

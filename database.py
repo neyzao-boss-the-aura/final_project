@@ -35,6 +35,7 @@ class Ordem(Base):
     cliente = Column(String(50), nullable=False)
     responsavel = Column(String(50), nullable=False)
     equipamento = Column(String(50))
+    recurso = Column(String(50))
     prioridade = Column(String(50))
     estado = Column(String(50))
     data_abertura = Column(Date)

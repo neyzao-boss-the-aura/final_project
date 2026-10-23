@@ -7,10 +7,10 @@
         </div>
 </div>
     <p>O endpoint atual é: {{ request.endpoint }}</p>
-    {% if request.endpoint == 'novo_equipamento' %}
+    {% if request.endpoint == 'listar_equipamentos' %}
     <section class="painel formulario">
         <h2>Novo Cadastro</h2>
-        <form method="POST" action="{{ url_for('novo_equipamentos') }}">
+        <form method="POST" action="{{ url_for('novo_equipamento') }}">
             <div class="linha-campos">
                 <div class="campo">
                     <label for="nome">Nome do equipamento</label>
@@ -41,7 +41,7 @@
     </section>
     <br>
     {% if not editar %}
-    <a href="{{ url_for('listar_equipamentos') }}" class="botao"> Listar equipamentos </a>
+    <a href="{{ url_for('novo_equipamento') }}" class="botao"> Listar equipamentos </a>
     {% endif %}
     {% endif %}
 {% endblock conteudo %}

@@ -13,13 +13,13 @@
             <div class="menu-titulo"> ⚙️ Gems </div>
             <ul>
                 <li>
-                    <a href="{{ url_for('listar_cadastros') }}"
-                       class="{{ 'ativo' if request.endpoint == 'listar_cadastros' else '' }}">
+                    <a href="{{ url_for('inicio') }}"
+                       class="{{ 'ativo' if request.endpoint == 'inicio' else '' }}">
                        <span class="icone">🏠</span> Início
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('listar_equipamentos') }}"
+                    <a href="{{ url_for('novo_equipamento') }}"
                        class="{{ 'ativo' if request.endpoint == 'listar_equipamentos' in request.endpoint else '' }}">
                        <span class="icone">🛠️</span> Equipamentos
                     </a>
