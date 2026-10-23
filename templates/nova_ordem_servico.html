@@ -8,26 +8,26 @@
         </div>
 </div>
 
-    {% if request.endpoint == 'nova_ordem_servico' %}
+    {% if request.endpoint == 'nova_ordem_servicos' %}
     <section class="painel formulario">
         <h2>Nova Ordem de Serviço</h2>
-        <form method="POST" action="{{ url_for('nova_ordem_servico') }}">
+        <form method="POST" action="{{ url_for('nova_ordem_servicos') }}">
             <div class="linha-campos">
                 <div class="campo">
-                    <label for="nome_solicitante">Nome do solicitante</label>
-                    <input type="text" id="nome_solicitante" name="nome_solicitante">
+                    <label for="cliente">Nome do cliente</label>
+                    <input type="text" id="cliente" name="cliente">
                 </div>
                 <div class="campo">
-                    <label for="nome_responsavel">Nome do responsável</label>
-                    <input type="text" id="nome_responavel" name="nome_responsavel">
+                    <label for="responsavel">Nome do responsável</label>
+                    <input type="text" id="responavel" name="responsavel">
                 </div>
                 <div class="campo">
-                    <label for="descricao">Descrição</label>
+                    <label for="descricao">Equipamento</label>
                     <input type="text" id="descricao" name="descricao">
                 </div>
                 <div class="campo">
-                    <label for="material">Material</label>
-                    <input type="text" id="material" name="material">
+                    <label for="recurso">Recurso</label>
+                    <input type="text" id="recurso" name="recurso">
                 </div>
                 <div class="campo">
                     <label for="prioridade">Prioridade</label>
@@ -46,17 +46,21 @@
                     </select>
                 </div>
                 <div class="campo">
-                    <label for="comeco_os">Comeco da OS</label>
-                    <input type="date" id="comeco_os" name="comeco_os">
+                    <label for="data_abertura">Data da abertura</label>
+                    <input type="date" id="data_abertura" name="data_abertura">
                 </div>
                 <div class="campo">
-                    <label for="conclusao">Conclusão</label>
-                    <input type="text" id="conclusao" name="conclusao">
+                    <label for="data_prazo">Data do prazo</label>
+                    <input type="date" id="data_prazo" name="data_prazo">
+                </div>
+                <div class="campo">
+                    <label for="descricao"> Descrição </label>
+                    <input type="text" id="descricao" name="descricao">
                 </div>
             </div>
                 <div class="acoes-form">
                     <button type="submit" class="botao">Cadastrar</button>
-                    <a href="{{ url_for('equipamentos') }}" class="botao botao-secundario">Cancelar</a>
+                    <a href="{{ url_for('nova_ordem_servicos') }}" class="botao botao-secundario">Cancelar</a>
                 </div>
         </form>
     </section>

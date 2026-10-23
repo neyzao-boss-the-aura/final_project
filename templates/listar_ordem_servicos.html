@@ -4,7 +4,7 @@
 <h2> Texto do início </h2>
 
 {% if not editar %}
-<a href="{{ url_for('ordem_servico') }}" class="botao"> Cadastrar ordem de serviço (OS) </a>
+<a href="{{ url_for('nova_ordem_servicos') }}" class="botao"> Cadastrar ordem de serviço (OS)</a>
 {% endif %}
 
 <section class="painel">
@@ -26,7 +26,7 @@
                     <tbody>
                         {%for ordem_servico in ordem_servicos%}
                             <tr>
-                                <td>{{ ordem_servico.i }}</td>
+                                <td>{{ ordem_servico.id }}</td>
                                 <td>{{ ordem_servico.nome }}</td>
                                 <td>{{ ordem_servico.quantidade }}</td>
                                 <td>{{ ordem_servico.usuario }}</td>

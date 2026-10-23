@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+    <h1>Nossa empresa é a Gems</h1>
+    <div class="cabecalho-pagina">
+        <div>
+            <h1>Cadastro</h1>
+            <p class="subtitulo">Cadastro dos funcionários</p>
+        </div>
+    </div>
+    {% if request.endpoint == 'listar_cadastros' %}
+        <section class="painel formulario">
+            <h2>Novo Cadastro</h2>
+            <form method="POST" action="{{ url_for('novo_cadastro') }}">
+                <div class="linha-campos">
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome">
+                    </div>
+                    <div class="campo">
+                        <label for="data_nascimento">Data de nascimento</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento">
+                    </div>
+                    <div class="campo">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email">
+                    </div>
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+                        <input type="number" id="telefone" name="telefone">
+                    </div>
+                    <div class="campo">
+                        <label for="senha">Senha</label>
+                        <input type="text" id="senha" name="senha">
+                    </div>
+                </div>
+                    <div class="acoes-form">
+                        <button type="submit" class="botao">Cadastrar</button>
+                        <a href="{{ url_for('listar_cadastros') }}" class="botao botao-secundario">Cancelar</a>
+                    </div>
+            </form>
+        </section>
+    {% endif %}
+
+{% endblock conteudo %}
+

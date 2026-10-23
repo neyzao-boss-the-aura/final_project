@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <div class="cabecalho-pagina">
+        <div>
+            <h1>Recursos</h1>
+            <p class="subtitulo">Cadastro dos recursos</p>
+        </div>
+    </div>
+    {% if not editar %}
+    <a href="{{ url_for('novo_recurso') }}" class="botao"> + Cadastrar recurso </a>
+    {% endif %}
+    <p>O endpoint atual é: {{ request.endpoint }}</p>
+    {% if request.endpoint == 'novo_recurso' %}
+    <section class="painel formulario">
+        <h2>Novo Recurso</h2>
+        <form method="POST" action="{{ url_for('novo_recurso') }}">
+            <div class="linha-campos">
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                <div class="campo">
+                    <label for="responsavel">Responsável</label>
+                    <input type="text" id="responsavel" name="responsavel">
+                </div>
+                <div class="campo">
+                    <label for="equipamento">Equipamento</label>                  LISTA
+                    <input type="text" id="equipamento" name="equipamento">
+                </div>
+                <div class="campo">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" name="descricao">
+                </div>
+            </div>
+                <div class="acoes-form">
+                    <button type="submit" class="botao">Cadastrar </button>
+                    <a href="{{ url_for('novo_recurso') }}" class="botao botao-secundario">Cancelar</a>
+                </div>
+        </form>
+    </section>
+    {% endif %}
+
+{% endblock conteudo %}

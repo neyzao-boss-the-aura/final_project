@@ -13,21 +13,27 @@
             <div class="menu-titulo"> ⚙️ Gems </div>
             <ul>
                 <li>
-                    <a href="{{ url_for('inicio') }}"
-                       class="{{ 'ativo' if request.endpoint == 'inicio' else '' }}">
+                    <a href="{{ url_for('listar_cadastros') }}"
+                       class="{{ 'ativo' if request.endpoint == 'listar_cadastros' else '' }}">
                        <span class="icone">🏠</span> Início
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('ferramentas') }}"
-                       class="{{ 'ativo' if 'ferramentas' in request.endpoint else '' }}">
+                    <a href="{{ url_for('listar_equipamentos') }}"
+                       class="{{ 'ativo' if request.endpoint == 'listar_equipamentos' in request.endpoint else '' }}">
                        <span class="icone">🛠️</span> Equipamentos
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('listar_times') }}"
-                       class="{{ 'ativo' if request.endpoint and 'ordem_servico' in request.endpoint else '' }}">
+                    <a href="{{ url_for('listar_ordem_servicos') }}"
+                       class="{{ 'ativo' if request.endpoint and 'listar_ordem_servicos' in request.endpoint else '' }}">
                        <span class="icone">📋</span> Ordem de serviço
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('listar_recursos') }}"
+                       class="{{ 'ativo' if request.endpoint == 'listar_recursos' in request.endpoint else '' }}">
+                       <span class="icone">🔧</span> Recurso
                     </a>
                 </li>
             </ul>

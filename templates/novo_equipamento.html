@@ -21,7 +21,7 @@
                     <input type="number" id="quantidade" name="quantidade">
                 </div>
                 <div class="campo">
-                    <label for="usuario">Usuario</label>
+                    <label for="usuario">Usuario</label>             LISTA
                     <input type="text" id="usuario" name="usuario">
                 </div>
                 <div class="campo">
@@ -36,14 +36,10 @@
                     <label for="atividade">Atividade</label>
                     <input type="text" id="atividade" name="atividade">
                 </div>
-                <div class="campo">
-                    <label for="preco">Preço</label>
-                    <input type="text" id="preco" name="preo">
-                </div>
             </div>
                 <div class="acoes-form">
                     <button type="submit" class="botao">Cadastrar</button>
-                    <a href="{{ url_for('equipamentos') }}" class="botao botao-secundario">Cancelar</a>
+                    <a href="{{ url_for('novo_equipamento') }}" class="botao botao-secundario">Cancelar</a>
                 </div>
         </form>
     </section>
