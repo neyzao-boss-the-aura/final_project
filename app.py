@@ -14,17 +14,17 @@ def home():
 
 @app.route("/cadastros", methods=["GET", "POST"])
 def listar_cadastros():
-    cadastros = tabela_cadastro.select_todos_cadastros()
+    novo_cadastro = tabela_cadastro.select_todos_cadastros()
     return render_template("novo_cadastro.html", novo_cadastro=novo_cadastro)
 
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
-    equipamentos = tabela_equipamentos.select_todos()
-    return render_template("novo_equipamento.html", equipamentos=equipamentos)
+    novo_equipamento = tabela_equipamentos.select_todos()
+    return render_template("novo_equipamento.html", novo_equipamento=novo_equipamento)
 
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
-    recursos = tabela_recurso.select_todos()
+    novo_recurso = tabela_recurso.select_todos()
     return render_template("novo_recurso.html", novo_recurso=novo_recurso)
 
 @app.route("/ordem_servicos", methods=["GET", "POST"])
@@ -69,7 +69,6 @@ def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
         cliente = request.form.get("cliente", "").strip()
-        data_agendada = request.form.get("data_agendada", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
         nota_cliente = request.form.get("nota_cliente", "").strip()
 
@@ -79,9 +78,6 @@ def novo_equipamento():
         if not cliente:
             flash('Por favor, insira o seu nome', 'error')
             return redirect(url_for("novo_equipamento"))
-        if not data_agendada:
-            flash('Por favor, selecione uma data para agendar', 'error')
-            return redirect(url_for("novo_equipamento"))
         if not quantidade:
             flash('Por favor, insira a quantidade', 'error')
             return redirect(url_for("novo_equipamento"))
@@ -89,8 +85,8 @@ def novo_equipamento():
             flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
             return redirect(url_for("novo_equipamento"))
 
-        tabela_equipamentos.salvar(nome=nome, cliente=cliente, data_agendada=data_agendada, quantidade=quantidade, nota_cliente=nota_cliente)
-        return redirect(url_for("listar_equipamentos"))
+        tabela_equipamentos.salvar(nome=nome, cliente=cliente, quantidade=quantidade, nota_cliente=nota_cliente)
+        return redirect(url_for("novo_equipamento"))
 
     equipamentos = tabela_equipamentos.select_todos()
     print(equipamentos)

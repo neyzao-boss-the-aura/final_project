@@ -4,7 +4,7 @@
 <div class="cabecalho-pagina">
         <div>
             <h1>Ordem de serviço</h1>
-            <p class="subtitulo">Cadastro das ordens de serviço</p>
+            <p class="subtitulo"></p>
         </div>
 </div>
 
@@ -17,18 +17,22 @@
                     <label for="cliente">Nome do cliente</label>
                     <input type="text" id="cliente" name="cliente">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="responsavel">Nome do responsável</label>
                     <input type="text" id="responavel" name="responsavel">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="descricao">Equipamento</label>
                     <input type="text" id="descricao" name="descricao">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="recurso">Recurso</label>
                     <input type="text" id="recurso" name="recurso">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="prioridade">Prioridade</label>
                     <select id="prioridade" name="prioridade">
@@ -37,6 +41,7 @@
                         <option> Baixa </option>
                     </select>
                 </div>
+                <br>
                 <div class="campo">
                     <label for="estado">Estado</label>
                     <select id="estado" name="estado">
@@ -45,25 +50,32 @@
                         <option> Não iniciado </option>
                     </select>
                 </div>
+                <br>
                 <div class="campo">
                     <label for="data_abertura">Data da abertura</label>
                     <input type="date" id="data_abertura" name="data_abertura">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="data_prazo">Data do prazo</label>
                     <input type="date" id="data_prazo" name="data_prazo">
                 </div>
+                <br>
                 <div class="campo">
                     <label for="descricao"> Descrição </label>
                     <input type="text" id="descricao" name="descricao">
                 </div>
             </div>
+                <br>
                 <div class="acoes-form">
                     <button type="submit" class="botao">Cadastrar</button>
                     <a href="{{ url_for('nova_ordem_servicos') }}" class="botao botao-secundario">Cancelar</a>
                 </div>
         </form>
     </section>
+    <br>
+    {% if not editar %}
+    <a href="{{ url_for('listar_ordem_servicos') }}" class="botao"> Listar ordem de serviço (OS)</a>
     {% endif %}
-
+    {% endif %}
 {% endblock conteudo %}

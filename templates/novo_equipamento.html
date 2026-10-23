@@ -6,7 +6,7 @@
             <p class="subtitulo">Cadastro dos Equipamentos</p>
         </div>
 </div>
-
+    <p>O endpoint atual é: {{ request.endpoint }}</p>
     {% if request.endpoint == 'novo_equipamento' %}
     <section class="painel formulario">
         <h2>Novo Cadastro</h2>
@@ -16,32 +16,32 @@
                     <label for="nome">Nome do equipamento</label>
                     <input type="text" id="nome" name="nome">
                 </div>
+                <br>
                 <div class="campo">
-                    <label for="quantidad">Quantidade de equipamentos</label>
+                    <label for="quantidade">Quantidade de equipamentos</label>
                     <input type="number" id="quantidade" name="quantidade">
                 </div>
+                <br>
                 <div class="campo">
-                    <label for="usuario">Usuario</label>             LISTA
+                    <label for="usuario">Usuário</label>
                     <input type="text" id="usuario" name="usuario">
                 </div>
+                <br>
                 <div class="campo">
-                    <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao">
-                </div>
-                <div class="campo">
-                    <label for="data_agendada">Data agendada</label>
-                    <input type="text" id="data_agendada" name="data_agendada">
-                </div>
-                <div class="campo">
-                    <label for="atividade">Atividade</label>
-                    <input type="text" id="atividade" name="atividade">
+                    <label for="nota_cliente">Nota do cliente</label>
+                    <input type="text" id="nota_cliente" name="nota_cliente">
                 </div>
             </div>
+            <br>
                 <div class="acoes-form">
                     <button type="submit" class="botao">Cadastrar</button>
                     <a href="{{ url_for('novo_equipamento') }}" class="botao botao-secundario">Cancelar</a>
                 </div>
         </form>
     </section>
+    <br>
+    {% if not editar %}
+    <a href="{{ url_for('listar_equipamentos') }}" class="botao"> Listar equipamentos </a>
+    {% endif %}
     {% endif %}
 {% endblock conteudo %}

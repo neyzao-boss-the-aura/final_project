@@ -1,42 +1,47 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-
-{% if not editar %}
-<a href="{{ url_for('listar_recursos') }}" class="botao"> - Listar recursos </a>
-{% endif %}
-<p>O endpoint atual é: {{ request.endpoint }}</p>
-batatata
+    <div class="cabecalho-pagina">
+        <div>
+            <h1>Recursos</h1>
+            <p class="subtitulo"></p>
+        </div>
+    </div>
 {% if request.endpoint == 'novo_recurso' %}
-<section class="painel">
-        <h2>Lista dos recursos  </h2>
-        {% if recursos %}
-            <table>
-    <!-- "thead" serve como cabeçalho e "tbody" como informação-->
-                <thead>
-                    <tr>
-                        <th> Id </th>
-                        <th> Nome </th>
-                        <th> Responsável </th>
-                        <th> Equipamento </th>
-                        <th> Descrição </th>
-                    </tr>
-                </thead>
-                    <tbody>
-                        {% for recurso in recursos %}
-                            <tr>
-                                <td>{{ recurso.id }}</td>
-                                <td>{{ recurso.nome }}</td>
-                                <td>{{ recurso.responsavel }}</td>
-                                <td>{{ recurso.equipamento }}</td>
-                                <td>{{ recurso.descricao }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-            </table>
-        {% else %}
-            <p class="vazio">Nenhum recurso cadastrado ainda</p>
-        {% endif %}
-</section>
+    <section class="painel formulario">
+        <h2>Novo Recurso</h2>
+        <form method="POST" action="{{ url_for('novo_recurso') }}">
+            <div class="linha-campos">
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                <br>
+                <div class="campo">
+                    <label for="responsavel">Responsável</label>
+                    <input type="text" id="responsavel" name="responsavel">     LISTA
+                </div>
+                <br>
+                <div class="campo">
+                    <label for="equipamento">Equipamento</label>                  LISTA
+                    <input type="text" id="equipamento" name="equipamento">
+                </div>
+                <br>
+                <div class="campo">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" name="descricao">
+                </div>
+            </div>
+            <br>
+                <div class="acoes-form">
+                    <button type="submit" class="botao">Cadastrar </button>
+                    <a href="{{ url_for('novo_recurso') }}" class="botao botao-secundario">Cancelar</a>
+                </div>
+        </form>
+    </section>
+    <br>
+    {% if not editar %}
+    <a href="{{ url_for('listar_recursos') }}" class="botao"> Listar recursos </a>
+    {% endif %}
 {% endif %}
 {% endblock conteudo %}

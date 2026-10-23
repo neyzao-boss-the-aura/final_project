@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<h2> Texto do início </h2>
-
-{% if not editar %}
-<a href="{{ url_for('nova_ordem_servicos') }}" class="botao"> Cadastrar ordem de serviço (OS)</a>
-{% endif %}
+<h1> Ordem de serviço </h1>
 
 <section class="painel">
         <h2>Lista das OS's cadastradas </h2>
@@ -41,4 +37,7 @@
             <p class="vazio">Nenhuma pessoa cadastrada ainda</p>
         {% endif %}
 </section>
+{% if not editar %}
+<a href="{{ url_for('nova_ordem_servicos') }}" class="botao"> Cadastrar ordem de serviço (OS)</a>
+{% endif %}
 {% endblock conteudo %}

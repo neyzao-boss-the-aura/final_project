@@ -2,12 +2,10 @@
 
 {% block conteudo %}
 <h2> Texto do início </h2>
-
-{% if not editar %}
-<a href="{{ url_for('novo_equipamento') }}" class="botao"> Cadastrar equipamentos </a>
-{% endif %}
-
+<p>O endpoint atual é: {{ request.endpoint }}</p>
+{% if request.endpoint == 'listar_equipamentos' %}
 <section class="painel">
+    <form method="POST" action="{{ url_for('lista_equipamentos') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
         {% if equipamentos %}
             <table>
@@ -16,11 +14,9 @@
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Quantidade</th>
                         <th>Usuário</th>
-                        <th>Data agendada</th>
-                        <th>Descrição</th>
-                        <th>Atividade</th>
+                        <th>Quantidade</th>
+                        <th>Nota do Cliente</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -28,11 +24,9 @@
                             <tr>
                                 <td>{{ equipamento.id }}</td>
                                 <td>{{ equipamento.nome }}</td>
-                                <td>{{ equipamento.quantidade }}</td>
                                 <td>{{ equipamento.usuario }}</td>
-                                <td>{{ equipamento.data_agendada }}</td>
-                                <td>{{ equipamento.descricao }}</td>
-                                <td>{{ equipamento.atividade }}</td>
+                                <td>{{ equipamento.quantidade }}</td>
+                                <td>{{ equipamento.nota_cliente }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -40,5 +34,10 @@
         {% else %}
             <p class="vazio">Nenhuma pessoa cadastrada ainda</p>
         {% endif %}
+    </form>
 </section>
+{% endif %}
+{% if not editar %}
+<a href="{{ url_for('novo_equipamento') }}" class="botao"> Cadastrar equipamentos </a>
+{% endif %}
 {% endblock conteudo %}
