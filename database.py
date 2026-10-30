@@ -29,10 +29,10 @@ class Equipamento(Base):
     nota_cliente = Column(String(300), default=0)
 
 class Ordem(Base):
-    __tablename__ = "ordem_servicos"
+    __tablename__ = "ordens"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    cliente = Column(String(50), nullable=False)
+    usuario = Column(String(50), nullable=False)
     responsavel = Column(String(50), nullable=False)
     equipamento = Column(String(50))
     recurso = Column(String(50))

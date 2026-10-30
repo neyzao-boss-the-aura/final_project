@@ -14,10 +14,10 @@ def select_todos_ordem():
     ordens = db_session.execute(ordens_sql).all()
     return ordens
 
-def salvar(cliente, responsavel, equipamento, recurso, prioridade, estado, data_abertura, data_prazo, descricao):
+def salvar(usuario, responsavel, equipamento, recurso, prioridade, estado, data_abertura, data_prazo, descricao):
     # 3- Salvar no banco
     try:
-        nova_ordem = Ordem(cliente=cliente, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
+        nova_ordem = Ordem(usuario=usuario, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         db_session.add(nova_ordem)
         db_session.commit()
         flash("Ordem de Serviço criada com sucesso", "success")

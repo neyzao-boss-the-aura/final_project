@@ -124,7 +124,7 @@ def novo_recurso():
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
 def nova_ordem_servicos():
     if request.method == "POST":
-        cliente = request.form.get("cliente", "").strip()
+        usuario = request.form.get("cliente", "").strip()
         responsavel = request.form.get("responsavel", "").strip()
         equipamento = request.form.get("equipamento", "").strip()
         recurso = request.form.get("recurso", "").strip()
@@ -134,8 +134,8 @@ def nova_ordem_servicos():
         data_prazo = request.form.get("data_prazo", "").strip()
         descricao = request.form.get("descricao", "").strip()
 
-        if not cliente:
-            flash('Por favor, insira o nome do cliente', 'error')
+        if not usuario:
+            flash('Por favor, insira o usuario', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not responsavel:
             flash('Por favor, insira o nome do responsável', 'error')
@@ -162,7 +162,7 @@ def nova_ordem_servicos():
             flash('Digite a descrição da OS', 'error')
             return redirect(url_for("nova_ordem_servicos"))
 
-        tabela_servico.salvar(cliente=cliente, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
+        tabela_servico.salvar(usuario=usuario, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         return redirect(url_for("nova_ordem_servicos"))
 
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
