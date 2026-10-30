@@ -9,9 +9,11 @@ from database import db_session, Recurso, Equipamento
 def select_todos_recursos():
     # Buscar todos os times no banco
     # 1- Montar o select
+    recursos_sql = (
+    select(Recurso, Equipamento)
+    .join(Equipamento, Recurso.equipamento == Equipamento.id)
+)
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
-    recursos_sql = select(Recurso, Equipamento).join(Equipamento, Recurso.equipamento == Equipamento.id).join(Recurso)
-    # 2- Executar o select
     recursos = db_session.execute(recursos_sql).all()
     return recursos
 
