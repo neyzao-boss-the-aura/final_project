@@ -3,7 +3,7 @@ from datetime import date
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker, scoped_session
 
-engine = create_engine("mysql+pymysql://root:senaisp@10.135.232.41:3306/projeto_final_2026")
+engine = create_engine("mysql+pymysql://root:senaisp@localhost/projeto_final_2026")
 
 db_session = scoped_session (sessionmaker(bind=engine))
 
