@@ -10,6 +10,10 @@ app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
 @app.route("/", methods=["GET", "POST"])
+def index():
+    return render_template("index.html")
+
+@app.route("/inicio", methods=["GET", "POST"])
 def inicio():
     return render_template("inicio.html")
 
