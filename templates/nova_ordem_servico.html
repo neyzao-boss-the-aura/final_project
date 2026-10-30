@@ -15,7 +15,11 @@
             <div class="linha-campos">
                 <div class="campo">
                     <label for="usuario">Usuário</label>
-                    <input type="text" id="usuario" name="usuario">
+                    <select name="usuario">
+                            {% for cadastro in cadastros %}
+                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
+                            {% endfor %}
+                    </select>
                 </div>
                 <br>
                 <div class="campo">
