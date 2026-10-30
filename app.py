@@ -26,7 +26,7 @@ def listar_equipamentos():
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
     novo_recurso = tabela_recurso.select_todos_recursos()
-    return render_template("novo_recurso.html", novo_recurso=novo_recurso)
+    return render_template("listar_recursos.html", novo_recurso=novo_recurso)
 
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
@@ -119,7 +119,7 @@ def novo_recurso():
 
     recursos = tabela_recurso.select_todos_recursos()
     print(recursos)
-    return render_template("listar_recursos.html", novo_recurso=novo_recurso)
+    return render_template("novo_recurso.html", novo_recurso=novo_recurso)
 
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
 def nova_ordem_servicos():

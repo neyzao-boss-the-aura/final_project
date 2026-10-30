@@ -24,11 +24,15 @@
                 <br>
                 <div class="campo">
                     <label for="usuario">Usuário</label>
-                    <input type="text" id="usuario" name="usuario">
+                    <select name="usuario">
+                            {% for cadastro in cadastros %}
+                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
+                            {% endfor %}
+                    </select>
                 </div>
                 <br>
                 <div class="campo">
-                    <label for="nota_cliente">Nota do cliente</label>
+                    <label for="nota_cliente">Nota do Usuário</label>
                     <input type="text" id="nota_cliente" name="nota_cliente">
                 </div>
             </div>
