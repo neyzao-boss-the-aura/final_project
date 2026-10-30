@@ -3,37 +3,42 @@ oii
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gems</title>
+    <title>Title</title>
     <link rel="stylesheet" href="/static/final.css">
 </head>
 <body>
-
-    <div class="cabecalho">
-            <div class="titulo">
-                <img class="image_gc" src="/static/gems.png">
-                Gᴇᴍs Cᴏʀᴘ
-            </div>
-    </div>
-
-    <div class="pai">
-         <div class="nav">
-                    <a href="{{ url_for('inicio') }}">
-                    <span class="icone">🏠︎</span> Início
+    <div class="layout">
+f3vybejnitbg4umrib5hyu6nm3ojgti45uhygt4im3ouhyb
+        <!-- MENU VERTICAL -->
+        <nav class="menu-lateral">
+            <div class="menu-titulo"> ⚙️ Gems </div>
+            <ul>
+                <li>
+                    <a href="{{ url_for('inicio') }}"
+                       class="{{ 'ativo' if request.endpoint == 'inicio' else '' }}">
+                       <span class="icone">🏠</span> Início
                     </a>
-
-                    <a href="{{ url_for('novo_equipamento') }}">
-                    <span class="icone">🛠</span> Equipamentos
+                </li>
+                <li>
+                    <a href="{{ url_for('novo_equipamento') }}"
+                       class="{{ 'ativo' if request.endpoint == 'listar_equipamentos' in request.endpoint else '' }}">
+                       <span class="icone">🛠️</span> Equipamentos
                     </a>
-
-                    <a href="{{ url_for('listar_recursos') }}">
-                    <span class="icone">⏣</span> Recursos
+                </li>
+                <li>
+                    <a href="{{ url_for('listar_ordem_servicos') }}"
+                       class="{{ 'ativo' if request.endpoint and 'listar_ordem_servicos' in request.endpoint else '' }}">
+                       <span class="icone">📋</span> Ordem de serviço
                     </a>
-
-                    <a href="{{ url_for('listar_ordem_servicos') }}">
-                    <span class="icone">🗒</span> Ordem de Serviço
+                </li>
+                <li>
+                    <a href="{{ url_for('listar_recursos') }}"
+                       class="{{ 'ativo' if request.endpoint == 'listar_recursos' in request.endpoint else '' }}">
+                       <span class="icone">🔧</span> Recurso
                     </a>
-         </div>
-    </div>
+                </li>
+            </ul>
+        </nav>
 
         <!-- CONTEÚDO -->
         <main class="conteudo">
@@ -50,6 +55,8 @@ oii
             {% block conteudo %}
             {% endblock %}
         </main>
+
+    </div>
 
 </body>
 </html>
