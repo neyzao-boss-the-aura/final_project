@@ -31,7 +31,7 @@
                     <br>
                     <div class="campo">
                         <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" required pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="(18) 12345-6789">
+                        <input type="text" id="telefone" name="telefone">
                     </div>
                     <br>
                     <div class="campo">
@@ -46,9 +46,6 @@
                     </div>
             </form>
         </section>
-    {% if not editar %}
-    <a href="{{ url_for('nova_ordem_servicos') }}" class="botao">  (OS)</a>
-    {% endif %}
     {% endif %}
 
 {% endblock conteudo %}

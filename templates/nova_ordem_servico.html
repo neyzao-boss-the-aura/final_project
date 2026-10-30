@@ -28,21 +28,21 @@
                 </div>
                 <br>
                 <div class="campo">
-                    <label for="descricao">Equipamento</label>
-                    <input type="text" id="descricao" name="descricao">
-                </div>
-                <div class="campo">
                     <label for="equipamento">Equipamento</label>
                     <select name="equipamento">
                             {% for equipamento in equipamentos %}
-                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
+                            <option value="{{ equipamentos.id }}">{{ equipamentos.nome }}</option>
                             {% endfor %}
                     </select>
                 </div>
                 <br>
                 <div class="campo">
                     <label for="recurso">Recurso</label>
-                    <input type="text" id="recurso" name="recurso">
+                    <select name="recurso">
+                            {% for recurso in recursos %}
+                            <option value="{{ recursos.id }}">{{ recursos.nome }}</option>
+                            {% endfor %}
+                    </select>
                 </div>
                 <br>
                 <div class="campo">

@@ -16,8 +16,8 @@ class Cadastro(Base):
     nome = Column(String(50), nullable=False)
     data_nascimento = Column(Date)
     email = Column(String(100))
-    telefone = Column(Integer)
-    senha = Column(String(50))
+    telefone = Column(String(20))
+    senha = Column(String(25))
 
 class Equipamento(Base):
     __tablename__ = "equipamentos"
