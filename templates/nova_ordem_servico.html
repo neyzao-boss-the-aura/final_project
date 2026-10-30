@@ -31,6 +31,14 @@
                     <label for="descricao">Equipamento</label>
                     <input type="text" id="descricao" name="descricao">
                 </div>
+                <div class="campo">
+                    <label for="equipamento">Equipamento</label>
+                    <select name="equipamento">
+                            {% for equipamento in equipamentos %}
+                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
                 <br>
                 <div class="campo">
                     <label for="recurso">Recurso</label>
