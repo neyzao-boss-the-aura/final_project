@@ -1,33 +1,32 @@
 {% extends 'base.html' %}
 {% block conteudo %}
 
- <div class="cabecalho-pagina">
+ <div class="main">
         <div>
             <h1>Cadastro/Login</h1>
-            <p class="subtitulo"></p>
         </div>
- </div>
     {% if request.endpoint == 'inicio' %}
-            <section class="painel formulario">
                 <h2>Login </h2>
                 <form method="POST" action="{{ url_for('novo_cadastro') }}">
-                    <div class="linha-campos">
-                        <div class="campo">
+                    <div class="main">
+                        <div class="main">
                             <label for="nome">Email</label>
                             <input type="text" id="nome" name="nome">
                         </div>
                         <br>
-                        <div class="campo">
+                        <div class="main">
                             <label for="senha">Senha</label>
                             <input type="text" id="senha" name="senha">
                         </div>
                         <br>
-                        <div class="acoes-form">
+                        <div class="main">
                             <button type="submit" class="botao">Entrar</button>
                             <a href="{{ url_for('inicio') }}" class="botao botao-secundario">Cancelar</a>
                         </div>
                 </form>
             </section>
+ </div>
+
     <br>
     {% if not editar %}
     <a href="{{ url_for('novo_cadastro') }}" class="botao"> Criar conta</a>
