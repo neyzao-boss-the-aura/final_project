@@ -10,9 +10,9 @@ def select_todos_equipamentos():
     # Buscar todos os times no banco
     # 1- Montar o select
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
-    equipamentos_sql = select(Equipamento, Ordem, Cadastro).join(Ordem, Equipamento.usuario == Ordem.id)
+    equipamentos_sql = select(Equipamento, Cadastro).join(Equipamento, Cadastro.id == Equipamento.id)
     # 2- Executar o select
-    equipamentos = db_session.execute(equipamentos_sql).scalars().all()
+    equipamentos = db_session.execute(equipamentos_sql).all()
     return equipamentos
 
 def salvar(nome, usuario, quantidade, nota_cliente):

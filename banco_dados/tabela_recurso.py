@@ -10,17 +10,16 @@ def select_todos_recursos():
     # Buscar todos os times no banco
     # 1- Montar o select
     recursos_sql = (
-    select(Recurso, Equipamento)
-    .join(Equipamento, Recurso.equipamento == Equipamento.id)
+    select(Recurso)
 )
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
     recursos = db_session.execute(recursos_sql).all()
     return recursos
 
-def salvar(nome, responsavel, equipamento, descricao):
+def salvar(nome, responsavel, descricao):
     # 3- Salvar no banco
     try:
-        novo_recurso = Recurso(nome=nome, responsavel=responsavel, equipamento=equipamento, descricao=descricao)
+        novo_recurso = Recurso(nome=nome, responsavel=responsavel, descricao=descricao)
         db_session.add(novo_recurso)
         db_session.commit()
         flash("Recurso criado com sucesso", "success")

@@ -20,7 +20,7 @@ def inicio():
 @app.route("/cadastros", methods=["GET", "POST"])
 def listar_cadastros():
     novo_cadastro = tabela_cadastro.select_todos_cadastros()
-    return render_template("novo_cadastro.html", novo_cadastro=novo_cadastro)
+    return render_template("listar_cadastros.html", novo_cadastro=novo_cadastro)
 
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
@@ -102,7 +102,6 @@ def novo_recurso():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
         responsavel = request.form.get("responsavel", "").strip()
-        equipamento = request.form.get("equipamento", "").strip()
         descricao = request.form.get("descricao", "").strip()
 
         if not nome:
@@ -111,14 +110,11 @@ def novo_recurso():
         if not responsavel:
             flash('Por favor, insira o responsável pelo recurso', 'error')
             return redirect(url_for("novo_recurso"))
-        if not equipamento:
-            flash('Por favor, insira o equipamento que será concertado', 'error')
-            return redirect(url_for("novo_recurso"))
         if not descricao:
             flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
             return redirect(url_for("novo_recurso"))
 
-        tabela_recurso.salvar(nome=nome, responsavel=responsavel, equipamento=equipamento, descricao=descricao)
+        tabela_recurso.salvar(nome=nome, responsavel=responsavel, descricao=descricao)
         return redirect(url_for("novo_recurso"))
 
     recursos = tabela_recurso.select_todos_recursos()

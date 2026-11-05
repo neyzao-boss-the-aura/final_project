@@ -16,7 +16,7 @@ class Cadastro(Base):
     nome = Column(String(50), nullable=False)
     data_nascimento = Column(Date)
     email = Column(String(100))
-    telefone = Column(String(20))
+    telefone = Column(String(50))
     senha = Column(String(25))
 
 class Equipamento(Base):
@@ -48,7 +48,6 @@ class Recurso(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(50), nullable=False)
     responsavel = Column(String(50), nullable=False)
-    equipamento = Column(String(50))
     descricao = Column(String(300))
 
 if __name__ == "__main__":

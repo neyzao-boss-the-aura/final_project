@@ -22,14 +22,6 @@
                     <input type="text" id="responsavel" name="responsavel">     LISTA
                 </div>
                 <br>
-                <div class="campo">
-                    <label for="equipamento">Equipamento</label>
-                    <select name="equipamento">
-                            {% for equipamento in equipamentos %}
-                            <option value="{{ equipamentos.id }}">{{ equipamentos.nome }}</option>
-                            {% endfor %}
-                    </select>
-                </div>
                 <br>
                 <div class="campo">
                     <label for="descricao">Descrição</label>
