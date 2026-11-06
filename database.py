@@ -19,6 +19,9 @@ class Cadastro(Base):
     telefone = Column(String(50))
     senha = Column(String(25))
 
+    def __repr__(self):
+        return f"{self.nome}"
+
 class Equipamento(Base):
     __tablename__ = "equipamentos"
 
@@ -27,6 +30,9 @@ class Equipamento(Base):
     usuario = Column(String(50), default=0)
     quantidade = Column(Integer, default=0)
     nota_usuario = Column(String(300), default=0)
+
+    def __repr__(self):
+        return f"{self.nome}"
 
 class Ordem(Base):
     __tablename__ = "ordens"
@@ -42,6 +48,9 @@ class Ordem(Base):
     data_prazo = Column(Date)
     descricao = Column(String(350))
 
+    def __repr__(self):
+        return f"{self.id}"
+
 class Recurso(Base):
     __tablename__ = "recursos"
 
@@ -49,6 +58,9 @@ class Recurso(Base):
     nome = Column(String(50), nullable=False)
     responsavel = Column(String(50), nullable=False)
     descricao = Column(String(300))
+
+    def __repr__(self):
+        return f"{self.nome}"
 
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)

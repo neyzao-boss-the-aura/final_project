@@ -6,7 +6,7 @@
 <section class="painel">
     <form method="POST" action="{{ url_for('novo_equipamento') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
-        {% if equipamentos %}
+        {% if True%}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
                 <thead>
@@ -19,11 +19,12 @@
                     </tr>
                 </thead>
                     <tbody>
+
                         {%for equipamento in equipamentos%}
                             <tr>
                                 <td>{{ equipamento.id }}</td>
                                 <td>{{ equipamento.nome }}</td>
-                                <td>{{ equipamento.usuario }}</td>
+                                <td>{{ equipamento.usuario.nome }}</td>
                                 <td>{{ equipamento.quantidade }}</td>
                                 <td>{{ equipamento.nota_cliente }}</td>
                             </tr>

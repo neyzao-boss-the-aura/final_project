@@ -87,15 +87,17 @@ def novo_equipamento():
             flash('Por favor, insira a quantidade', 'error')
             return redirect(url_for("novo_equipamento"))
         if not nota_cliente:
-            flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
+            flash('Deixe uma nota de descrição ', 'error')
             return redirect(url_for("novo_equipamento"))
 
         tabela_equipamentos.salvar(nome=nome, usuario=usuario, quantidade=quantidade, nota_cliente=nota_cliente)
         return redirect(url_for("novo_equipamento"))
 
-    equipamentos = tabela_equipamentos.select_todos_equipamentos()
-    print(equipamentos)
-    return render_template("listar_equipamentos.html", equipamentos=equipamentos)
+    equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
+    usuarios_lista = tabela_cadastro.select_todos_cadastros()
+    print(equipamentos_lista)
+    print(usuarios_lista)
+    return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista, usuarios=usuarios_lista)
 
 @app.route("/recurso/novo", methods=["GET", "POST"])
 def novo_recurso():
@@ -119,7 +121,7 @@ def novo_recurso():
 
     recursos = tabela_recurso.select_todos_recursos()
     print(recursos)
-    return render_template("novo_recurso.html", novo_recurso=novo_recurso)
+    return render_template("novo_recurso.html", novo_recurso=recursos)
 
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
 def nova_ordem_servicos():
@@ -168,6 +170,32 @@ def nova_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
     print(nova_ordem_servicos)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
+
+@app.route("/movimentacao/nova", methods=["GET", "POST"])
+def nova_movimentacao(jogador_id=None):
+    if request.method == "POST":
+        jogador_id = request.form.get("jogador_id")
+        time_destino_id = request.form.get("time_destino_id")
+
+        if not jogador_id:
+            flash("preencha o jogador id", "error")
+            return render_template("movimentacao.html")
+        if not time_destino_id:
+            flash("preencha o time destino id", "error")
+            return render_template("movimentacao.html")
+
+        tabela_movimentacao.salvar_movimentacao(jogador_id, time_destino_id)
+        return redirect(url_for("nova_movimentacao"))
+    # Carregar dados para movimentação
+    movimentacoes = tabela_movimentacao.select_todos()
+    jogadores = tabela_jogador.select_todos()
+    times = tabela_time.select_todos()
+
+    return render_template(
+        "movimentacoes.html",
+        movimentacoes=movimentacoes,
+        jogadores=jogadores,
+        times=times)
 
 if __name__ == "__main__":
     app.run(debug=True)

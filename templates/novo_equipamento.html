@@ -25,7 +25,7 @@
                     <label for="usuario">Usuário</label>
                     <select name="usuario">
                             {% for cadastro in cadastros %}
-                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
+                            <option value="{{ cadastro.id }}">{{ cadastro.nome }}</option>
                             {% endfor %}
                     </select>
                 </div>
