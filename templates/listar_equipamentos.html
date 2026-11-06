@@ -4,7 +4,7 @@
 <h1>Equipamentos</h1>
 {% if request.endpoint == 'novo_equipamento' %}
 <section class="painel">
-    <form method="POST" action="{{ url_for('novo_equipamento') }}">
+    <form method="POST" action="{{ url_for('listar_equipamentos') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
         {% if True%}
             <table>

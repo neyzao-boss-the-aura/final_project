@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from banco_dados import tabela_cadastro, tabela_equipamentos, tabela_servico, tabela_recurso
 from database import *
 from datetime import datetime
@@ -13,7 +14,83 @@ app.secret_key = "chave-secreta-projeto-2026"
 def index():
     return render_template("index.html")
 
+
+#Configurar Flask-login
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message = "Faça login para acessar"
+
+#Prevenir gargalo "too many connections"
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
+#Carregar informações do usuário logado
+@login_manager.user_loader
+def load_user(user_id):
+    return db_session.get(Usuario, int(user_id))
+
+#Interface de autenticação
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form.get("email", "").strip()
+        password = request.form.get("senha", "").strip()
+
+        usuario_sql = select(Usuario).where(Usuario.email == email)
+        usuario_resultado = db_session.execute(usuario_sql).scalar()
+
+        if not usuario_resultado:
+            flash("Falha ao autenticar", "error")
+            return render_template("login.html")
+
+        if usuario_resultado and usuario_resultado.check_password(senha):
+            login_user(usuario_resultado)
+            return redirect(url_for("dashboard"))
+
+    return render_template(
+        "login.html",
+        registro= request.args.get("registro") == 'True')
+
+@app.route("/registro", methods=["GET", "POST"])
+def registro():
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        email = request.form.get("email", "").strip()
+        senha = request.form.get("senha", "").strip()
+
+        if not nome and not email and not senha :
+            flash("PREENCHA OS CAMPOS", "error")
+            return redirect (url_for("registro"))
+
+        usuario_sql = select(Usuario).where (Usuario.email == email)
+        usuario_email = db_session.execute(usuario_sql).scalars().all()
+
+        if usuario_email:
+            flash("Email já cadastrado")
+            return redirect (url_for("registro"))
+        try:
+            novo_usuario = Usuario(
+                nome=nome,
+                email=email)
+
+            novo_usuario.set_password(senha)
+            db_session.add(novo_usuario)
+            db_session.commit()
+            flash("Usuario cadastrado com sucesso", "success")
+
+        except SQLAlchemyError as e:
+            print(f"SQLAlchemyError: {e}")
+            flash("Erro no banco")
+            pass
+        except Exception as e:
+            print(f"Erro ao registrar: {e}")
+            flash("Erro ao registrar", "error")
+            return redirect (url_for("registro"))
+        return render_template("login.html")
+
 @app.route("/inicio", methods=["GET", "POST"])
+@login_required
 def inicio():
     return render_template("inicio.html")
 
@@ -168,34 +245,14 @@ def nova_ordem_servicos():
         return redirect(url_for("nova_ordem_servicos"))
 
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
+    novo_recurso = tabela_recurso.select_todos_recursos()
+    novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
+    novo_cadastro = tabela_cadastro.select_todos_cadastros()
     print(nova_ordem_servicos)
-    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
-
-@app.route("/movimentacao/nova", methods=["GET", "POST"])
-def nova_movimentacao(jogador_id=None):
-    if request.method == "POST":
-        jogador_id = request.form.get("jogador_id")
-        time_destino_id = request.form.get("time_destino_id")
-
-        if not jogador_id:
-            flash("preencha o jogador id", "error")
-            return render_template("movimentacao.html")
-        if not time_destino_id:
-            flash("preencha o time destino id", "error")
-            return render_template("movimentacao.html")
-
-        tabela_movimentacao.salvar_movimentacao(jogador_id, time_destino_id)
-        return redirect(url_for("nova_movimentacao"))
-    # Carregar dados para movimentação
-    movimentacoes = tabela_movimentacao.select_todos()
-    jogadores = tabela_jogador.select_todos()
-    times = tabela_time.select_todos()
-
-    return render_template(
-        "movimentacoes.html",
-        movimentacoes=movimentacoes,
-        jogadores=jogadores,
-        times=times)
+    print(novo_recurso)
+    print(novo_equipamento)
+    print(novo_cadastro)
+    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_cadastro=novo_cadastro)
 
 if __name__ == "__main__":
     app.run(debug=True)
