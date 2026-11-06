@@ -13,7 +13,7 @@
                 Gᴇᴍs Cᴏʀᴘ
             </div>
     </div>
-
+    {% if current_user.id %}
     <div class="pai">
          <div class="nav">
                     <a href="{{ url_for('inicio') }}">
@@ -33,6 +33,7 @@
                     </a>
          </div>
     </div>
+    {% endif %}
 
         <!-- CONTEÚDO -->
         <main class="conteudo">

@@ -12,19 +12,6 @@ db_session = scoped_session (sessionmaker(bind=engine))
 
 Base = declarative_base()
 
-class Cadastro(Base):
-    __tablename__ = "cadastros"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(50), nullable=False)
-    data_nascimento = Column(Date)
-    email = Column(String(100))
-    telefone = Column(String(50))
-    senha_hash = Column(String(255))
-
-    def __repr__(self):
-        return f"{self.nome}"
-
 class Equipamento(Base):
     __tablename__ = "equipamentos"
 

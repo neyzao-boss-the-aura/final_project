@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from banco_dados import tabela_cadastro, tabela_equipamentos, tabela_servico, tabela_recurso
+from banco_dados import tabela_equipamentos, tabela_servico, tabela_recurso, tabela_usuario
 from database import *
 from datetime import datetime
 from templates import *
@@ -13,7 +13,6 @@ app.secret_key = "chave-secreta-projeto-2026"
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
-
 
 #Configurar Flask-login
 login_manager = LoginManager(app)
@@ -44,9 +43,9 @@ def login():
             flash("Falha ao autenticar", "error")
             return render_template("login.html")
 
-        if usuario_resultado and usuario_resultado.check_password(senha):
+        if usuario_resultado and usuario_resultado.check_password(password):
             login_user(usuario_resultado)
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("inicio"))
 
     return render_template(
         "login.html",
@@ -89,15 +88,10 @@ def registro():
             return redirect (url_for("registro"))
         return render_template("login.html")
 
-@app.route("/inicio", methods=["GET", "POST"])
-@login_required
-def inicio():
-    return render_template("inicio.html")
-
 @app.route("/cadastros", methods=["GET", "POST"])
-def listar_cadastros():
-    novo_cadastro = tabela_cadastro.select_todos_cadastros()
-    return render_template("listar_cadastros.html", novo_cadastro=novo_cadastro)
+def listar_usuarios():
+    novo_usuario = tabela_usuario.select_todos_usuarios()
+    return render_template("listar_usuarios.html", novo_usuario=novo_usuario)
 
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
@@ -114,45 +108,13 @@ def listar_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
     return render_template("listar_ordem_servicos.html", nova_ordem_servicos=nova_ordem_servicos)
 
-@app.route("/cadastro/novo", methods=["GET", "POST"])
-def novo_cadastro():
-    if request.method == "POST":
-        nome = request.form.get("nome", "").strip()
-        data_nascimento = request.form.get("data_nascimento", "").strip()
-        telefone = request.form.get("telefone", "").strip()
-        email = request.form.get("email", "").strip()
-        senha = request.form.get("senha", "").strip()
-
-        if not nome:
-            flash('Por favor, insira o seu nome', 'error')
-            return redirect(url_for("novo_cadastro"))
-        if not data_nascimento:
-            flash('Por favor, insira a sua data de nascimento', 'error')
-            return redirect(url_for("novo_cadastro"))
-        if not email:
-            flash('Por favor, insira o seu email', 'error')
-            return redirect(url_for("novo_cadastro"))
-        if not telefone:
-            flash('Por favor, insira o seu telefone', 'error')
-            return redirect(url_for("novo_cadastro"))
-        if not senha:
-            flash('Por favor, insira a sua senha', 'error')
-            return redirect(url_for("novo_cadastro"))
-
-        tabela_cadastro.salvar(nome=nome, data_nascimento=data_nascimento, email=email, telefone=telefone, senha=senha)
-        return redirect(url_for("novo_cadastro"))
-
-    cadastro = tabela_cadastro.select_todos_cadastros()
-    print(cadastro)
-    return render_template("novo_cadastro.html", cadastro=cadastro)
-
 @app.route("/equipamento/novo", methods=["GET", "POST"])
 def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
-        usuario = request.form.get("cliente", "").strip()
+        usuario = request.form.get("usuario", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
-        nota_cliente = request.form.get("nota_cliente", "").strip()
+        nota_usuario = request.form.get("nota_cliente", "").strip()
 
         if not nome:
             flash('Por favor, insira o nome do equipamento', 'error')
@@ -163,15 +125,15 @@ def novo_equipamento():
         if not quantidade:
             flash('Por favor, insira a quantidade', 'error')
             return redirect(url_for("novo_equipamento"))
-        if not nota_cliente:
+        if not nota_usuario:
             flash('Deixe uma nota de descrição ', 'error')
             return redirect(url_for("novo_equipamento"))
 
-        tabela_equipamentos.salvar(nome=nome, usuario=usuario, quantidade=quantidade, nota_cliente=nota_cliente)
+        tabela_equipamentos.salvar(nome=nome, usuario=usuario, quantidade=quantidade, nota_usuario=nota_usuario)
         return redirect(url_for("novo_equipamento"))
 
     equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
-    usuarios_lista = tabela_cadastro.select_todos_cadastros()
+    usuarios_lista = tabela_usuario.select_todos_usuarios()
     print(equipamentos_lista)
     print(usuarios_lista)
     return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista, usuarios=usuarios_lista)
@@ -247,12 +209,12 @@ def nova_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
     novo_recurso = tabela_recurso.select_todos_recursos()
     novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
-    novo_cadastro = tabela_cadastro.select_todos_cadastros()
+    novo_usuario = tabela_usuario.select_todos_usuarios()
     print(nova_ordem_servicos)
     print(novo_recurso)
     print(novo_equipamento)
-    print(novo_cadastro)
-    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_cadastro=novo_cadastro)
+    print(novo_usuario)
+    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
 
 if __name__ == "__main__":
     app.run(debug=True)

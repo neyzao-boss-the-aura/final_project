@@ -4,14 +4,14 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.elements import or_
 
-from database import db_session, Ordem, Equipamento, Cadastro, Recurso
+from database import db_session, Ordem, Equipamento, Usuario, Recurso
 
 def select_todos_ordem():
     # Buscar todos as OS no banco
     # 1- Montar o select
     ordens_sql = (
-    select(Ordem, Equipamento, Cadastro, Recurso)
-    .join(Cadastro, Ordem.usuario == Cadastro.id)
+    select(Ordem, Equipamento, Usuario, Recurso)
+    .join(Usuario, Ordem.usuario == Usuario.id)
     .join(Equipamento, Ordem.equipamento == Equipamento.id)
     .join(Recurso, Ordem.recurso == Recurso.id)
     )
