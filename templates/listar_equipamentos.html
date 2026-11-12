@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<h1>Equipamentos</h1>
-{% if request.endpoint == 'novo_equipamento' %}
-<section class="painel">
-        <h2>Lista dos equipamentos cadastrados </h2>
+    <h1>Equipamentos</h1>
+
+    <section class="painel">
+        <h2>Lista dos equipamentos cadastrados</h2>
+
         {% if equipamentos %}
             <table>
-    <!-- "thead" serve como cabeçalho e "tbody" como informação-->
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -16,24 +16,21 @@
                         <th>Nota do Usuário</th>
                     </tr>
                 </thead>
-                    <tbody>
-
-                        {%for equipamento in equipamentos%}
-                            <tr>
-                                <td>{{ equipamento.id }}</td>
-                                <td>{{ equipamento.nome }}</td>
-                                <td>{{ equipamento.quantidade }}</td>
-                                <td>{{ equipamento.nota_usuario }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
+                <tbody>
+                    {% for equipamento in equipamentos %}
+                        <tr>
+                            <td>{{ equipamento.id }}</td>
+                            <td>{{ equipamento.nome }}</td>
+                            <td>{{ equipamento.quantidade }}</td>
+                            <td>{{ equipamento.nota_usuario }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         {% else %}
             <p class="vazio">Nenhum equipamento cadastrado ainda</p>
         {% endif %}
-</section>
-{% endif %}
-{% if not editar %}
-<a href="{{ url_for('listar_equipamentos') }}" class="botao"> Cadastrar equipamentos </a>
-{% endif %}
+
+        <a href="{{ url_for('listar_equipamentos') }}" class="botao">Cadastrar equipamentos</a>
+    </section>
 {% endblock conteudo %}
