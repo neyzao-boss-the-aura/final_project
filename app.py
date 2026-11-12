@@ -136,6 +136,8 @@ def novo_equipamento():
     print(usuarios_lista)
     return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista)
 
+@app.route("/")
+
 @app.route("/recurso/novo", methods=["GET", "POST"])
 def novo_recurso():
     if request.method == "POST":
@@ -214,7 +216,7 @@ def nova_ordem_servicos():
     print(novo_usuario)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
 
-@app.route("funcionario/novo", methods=["GET", "POST"])
+@app.route("/funcionario/novo", methods=["GET", "POST"])
 def novo_funcionario():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -243,7 +245,11 @@ def novo_funcionario():
             flash('Por favor, selecione o estado', 'error')
             return redirect(url_for("novo_funcionario"))
 
-        tabela
+        tabela_funcionario.salvar(nome=nome, email=email, telefone=telefone, endereco=endereco, contratado_em=contratado_em, estado=estado)
+        return redirect(url_for("novo_funcionario"))
 
+    funcionarios = tabela_funcionario.select_todos_funcionario()
+    print(funcionarios)
+    return render_template("novo_funcionario.html", funcionarios=funcionarios)
 if __name__ == "__main__":
     app.run(debug=True)

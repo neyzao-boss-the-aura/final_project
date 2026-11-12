@@ -67,5 +67,18 @@ class Usuario(Base, UserMixin):
     def __repr__(self):
         return f"{self.nome}"
 
+class Funcionario(Base):
+    __tablename__ = "funcionarios"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(50), nullable=False)
+    email = Column(String(120), unique=True, nullable=False)
+    telefone = Column(Integer, nullable=False)
+    endereco = Column(String(120), nullable=False)
+    contratado_em = Column(Date)
+    estado = Column(String(50), nullable=False)
+
+    def __repr__(self):
+        return f"{self.nome}"
+
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)

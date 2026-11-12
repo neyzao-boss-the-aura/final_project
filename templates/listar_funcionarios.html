@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 <h1>Funcionários</h1>
-{% if request.endpoint == 'novo_funcionario' %}
+{% if request.endpoint == 'listar_funcionarios' %}
 <section class="painel">
         <h2>Lista dos funcionários cadastrados </h2>
         {% if funcionarios %}
