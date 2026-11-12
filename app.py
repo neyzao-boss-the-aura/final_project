@@ -193,7 +193,7 @@ def nova_ordem_servicos():
             flash('Digite a descrição da OS', 'error')
             return redirect(url_for("nova_ordem_servicos"))
 
-        tabela_servico.salvar(usuario=usuario, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
+        tabela_servico.salvar(usuario=usuario, responsavel=responsavel, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         return redirect(url_for("nova_ordem_servicos"))
 
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
