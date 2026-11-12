@@ -10,6 +10,12 @@ from templates import *
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
+
+
+# PENDÊNCIAS: LISTAR NA APP, EDITAR,
+
+
+
 @app.route("/")
 @login_required
 def inicio ():
@@ -84,6 +90,7 @@ def registro():
             db_session.add(novo_usuario)
             db_session.commit()
             flash("Usuario cadastrado com sucesso", "success")
+            return redirect(url_for('login'))
 
         except SQLAlchemyError as e:
             print(f"SQLAlchemyError: {e}")
@@ -131,12 +138,13 @@ def novo_equipamento():
         return redirect(url_for("novo_equipamento"))
 
     equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
-    usuarios_lista = tabela_funcionario.select_todos_usuarios()
     print(equipamentos_lista)
-    print(usuarios_lista)
     return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista)
 
-@app.route("/")
+@app.route("/funcionarios", methods=["GET", "POST"])
+def listar_funcionarios():
+    novo_funcionario = tabela_funcionario.select_todos_funcionario()
+    return render_template("listar_funcionarios.html", novo_funcionario=novo_funcionario)
 
 @app.route("/recurso/novo", methods=["GET", "POST"])
 def novo_recurso():
@@ -165,27 +173,15 @@ def novo_recurso():
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
 def nova_ordem_servicos():
     if request.method == "POST":
-        usuario = request.form.get("cliente", "").strip()
         responsavel = request.form.get("responsavel", "").strip()
-        equipamento = request.form.get("equipamento", "").strip()
-        recurso = request.form.get("recurso", "").strip()
         prioridade = request.form.get("prioridade", "").strip()
         estado = request.form.get("estado", "").strip()
         data_abertura = request.form.get("data_abertura", "").strip()
         data_prazo = request.form.get("data_prazo", "").strip()
         descricao = request.form.get("descricao", "").strip()
 
-        if not usuario:
-            flash('Por favor, insira o usuario', 'error')
-            return redirect(url_for("nova_ordem_servicos"))
         if not responsavel:
             flash('Por favor, insira o nome do responsável', 'error')
-            return redirect(url_for("nova_ordem_servicos"))
-        if not equipamento:
-            flash('Por favor, insira o equipamento', 'error')
-            return redirect(url_for("nova_ordem_servicos"))
-        if not recurso:
-            flash('Por favor, insira o recurso', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not prioridade:
             flash('Por favor, insira a prioridade', 'error')
@@ -203,18 +199,12 @@ def nova_ordem_servicos():
             flash('Digite a descrição da OS', 'error')
             return redirect(url_for("nova_ordem_servicos"))
 
-        tabela_servico.salvar(usuario=usuario, responsavel=responsavel, equipamento=equipamento, recurso=recurso, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
+        tabela_servico.salvar(responsavel=responsavel, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         return redirect(url_for("nova_ordem_servicos"))
 
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
-    novo_recurso = tabela_recurso.select_todos_recursos()
-    novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
-    novo_usuario = tabela_funcionario.select_todos_usuarios()
     print(nova_ordem_servicos)
-    print(novo_recurso)
-    print(novo_equipamento)
-    print(novo_usuario)
-    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
+    return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
 
 @app.route("/funcionario/novo", methods=["GET", "POST"])
 def novo_funcionario():

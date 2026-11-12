@@ -72,9 +72,9 @@ class Funcionario(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(50), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
-    telefone = Column(Integer, nullable=False)
+    telefone = Column(String(20), nullable=False)
     endereco = Column(String(120), nullable=False)
-    contratado_em = Column(Date)
+    contratado_em = Column(Date, nullable=False)
     estado = Column(String(50), nullable=False)
 
     def __repr__(self):
