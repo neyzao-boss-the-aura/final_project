@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from banco_dados import tabela_equipamentos, tabela_servico, tabela_recurso, tabela_usuario
+from banco_dados import tabela_equipamentos, tabela_servico, tabela_recurso, tabela_funcionario
 from database import *
 from datetime import datetime
 from templates import *
@@ -105,11 +105,6 @@ def listar_recursos():
     novo_recurso = tabela_recurso.select_todos_recursos()
     return render_template("listar_recursos.html", novo_recurso=novo_recurso)
 
-@app.route("/usuarios", methods=["GET", "POST"])
-def listar_usuarios():
-    novo_usuario = tabela_usuario.select_todos_usuarios()
-    return render_template("listar_usuarios.html", novo_usuario=novo_usuario)
-
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
@@ -136,7 +131,7 @@ def novo_equipamento():
         return redirect(url_for("novo_equipamento"))
 
     equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
-    usuarios_lista = tabela_usuario.select_todos_usuarios()
+    usuarios_lista = tabela_funcionario.select_todos_usuarios()
     print(equipamentos_lista)
     print(usuarios_lista)
     return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista)
@@ -212,37 +207,43 @@ def nova_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
     novo_recurso = tabela_recurso.select_todos_recursos()
     novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
-    novo_usuario = tabela_usuario.select_todos_usuarios()
+    novo_usuario = tabela_funcionario.select_todos_usuarios()
     print(nova_ordem_servicos)
     print(novo_recurso)
     print(novo_equipamento)
     print(novo_usuario)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
 
-@app.route("/usuario/novo1", methods=["GET", "POST"])
-def novo_usuario():
+@app.route("funcionario/novo", methods=["GET", "POST"])
+def novo_funcionario():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
         email = request.form.get("email", "").strip()
-        senha_hash = request.form.get("senha_hash", "").strip()
+        telefone = request.form.get("telefone", "").strip()
+        endereco = request.form.get("endereco", "").strip()
+        contratado_em = request.form.get("contratado_em", "").strip()
+        estado = request.form.get("estado", "").strip()
 
         if not nome:
-            flash("Digite o nome", "error")
-            return redirect(url_for("novo_usuario"))
+            flash('Por favor, insira o nome', 'error')
+            return redirect(url_for("novo_funcionario"))
         if not email:
-            flash("Digite o email", "error")
-            return redirect(url_for("novo_usuario"))
-        if not senha_hash:
-            flash("Digite a senha", "error")
-            return redirect(url_for("novo_usuario"))
+            flash('Por favor, insira o email', 'error')
+            return redirect(url_for("novo_funcionario"))
+        if not telefone:
+            flash('Por favor, insira o telefone', 'error')
+            return redirect(url_for("novo_funcionario"))
+        if not endereco:
+            flash('Por favor, insira o endereco', 'error')
+            return redirect(url_for("novo_funcionario"))
+        if not contratado_em:
+            flash('Por favor, insira o contratado em', 'error')
+            return redirect(url_for("novo_funcionario"))
+        if not estado:
+            flash('Por favor, selecione o estado', 'error')
+            return redirect(url_for("novo_funcionario"))
 
-        tabela_usuario.salvar(nome=nome, email=email, senha_hash=senha_hash)
-        return redirect(url_for("novo_usuario"))
-
-    usuario = tabela_usuario.select_todos_usuarios()
-    print(usuario)
-
-    return render_template("novo_usuario.html", novo_usuario=usuario )
+        tabela
 
 if __name__ == "__main__":
     app.run(debug=True)
