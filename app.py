@@ -10,9 +10,10 @@ from templates import *
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    return render_template("index.html")
+@app.route("/")
+@login_required
+def inicio ():
+    return render_template("inicio.html")
 
 #Configurar Flask-login
 login_manager = LoginManager(app)
@@ -109,6 +110,9 @@ def listar_recursos():
     novo_recurso = tabela_recurso.select_todos_recursos()
     return render_template("listar_recursos.html", novo_recurso=novo_recurso)
 
+@app.route("/usuarios", methods=["GET", "POST"])
+def listar_usuarios():
+
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
@@ -118,24 +122,20 @@ def listar_ordem_servicos():
 def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
-        usuario = request.form.get("usuario", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
-        nota_usuario = request.form.get("nota_cliente", "").strip()
+        nota_usuario = request.form.get("nota_usuario", "").strip()
 
         if not nome:
             flash('Por favor, insira o nome do equipamento', 'error')
-            return redirect(url_for("novo_equipamento"))
-        if not usuario:
-            flash('Por favor, insira o seu nome', 'error')
             return redirect(url_for("novo_equipamento"))
         if not quantidade:
             flash('Por favor, insira a quantidade', 'error')
             return redirect(url_for("novo_equipamento"))
         if not nota_usuario:
-            flash('Deixe uma nota de descrição ', 'error')
+            flash('Deixe uma nota  ', 'error')
             return redirect(url_for("novo_equipamento"))
 
-        tabela_equipamentos.salvar(nome=nome, usuario=usuario, quantidade=quantidade, nota_usuario=nota_usuario)
+        tabela_equipamentos.salvar(nome=nome, quantidade=quantidade, nota_usuario=nota_usuario)
         return redirect(url_for("novo_equipamento"))
 
     equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
@@ -221,6 +221,31 @@ def nova_ordem_servicos():
     print(novo_equipamento)
     print(novo_usuario)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
+
+@app.route("/usuario/novo", methods=["GET", "POST"])
+def novo_usuario():
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        email = request.form.get("email", "").strip()
+        senha_hash = request.form.get("senha", "").strip()
+
+        if not nome:
+            flash("Digite o nome", "error")
+            return redirect(url_for("novo_usuario"))
+        if not email:
+            flash("Digite o email", "error")
+            return redirect(url_for("novo_usuario"))
+        if not senha_hash:
+            flash("Digite o senha", "error")
+            return redirect(url_for("novo_usuario"))
+
+        tabela_usuario.salvar(nome=nome, email=email, senha_hash=senha_hash)
+        return redirect(url_for("novo_usuario"))
+
+    usuario = tabela_usuario.select_todos_usuarios()
+    print(usuario)
+
+    return render_template("novo_usuario.html", novo_usuario=usuario )
 
 if __name__ == "__main__":
     app.run(debug=True)

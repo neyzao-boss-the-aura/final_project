@@ -13,14 +13,6 @@
         <h2>Nova Ordem de Serviço</h2>
         <form method="POST" action="{{ url_for('nova_ordem_servicos') }}">
             <div class="linha-campos">
-                <div class="campo">
-                    <label for="usuario">Usuário</label>
-                    <select name="usuario">
-                            {% for cadastro in cadastros %}
-                            <option value="{{ cadastros.id }}">{{ cadastros.nome }}</option>
-                            {% endfor %}
-                    </select>
-                </div>
                 <br>
                 <div class="campo">
                     <label for="responsavel">Responsável</label>

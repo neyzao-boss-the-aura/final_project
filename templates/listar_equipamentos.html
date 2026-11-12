@@ -6,16 +6,15 @@
 <section class="painel">
     <form method="POST" action="{{ url_for('listar_equipamentos') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
-        {% if True%}
+        {% if request.endpoint == 'listar_equipamentos' %}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Usuário</th>
                         <th>Quantidade</th>
-                        <th>Nota do Cliente</th>
+                        <th>Nota do Usuário</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -24,15 +23,14 @@
                             <tr>
                                 <td>{{ equipamento.id }}</td>
                                 <td>{{ equipamento.nome }}</td>
-                                <td>{{ equipamento.usuario.nome }}</td>
                                 <td>{{ equipamento.quantidade }}</td>
-                                <td>{{ equipamento.nota_cliente }}</td>
+                                <td>{{ equipamento.nota_usuario }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
             </table>
         {% else %}
-            <p class="vazio">Nenhuma pessoa cadastrada ainda</p>
+            <p class="vazio">Nenhum equipamento cadastrado ainda</p>
         {% endif %}
     </form>
 </section>

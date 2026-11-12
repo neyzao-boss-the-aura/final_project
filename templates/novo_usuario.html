@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <div class="cabecalho-pagina">
+        <div>
+            <h1>Usuários</h1>
+            <p class="subtitulo"></p>
+        </div>
+    </div>
+{% if request.endpoint == 'novo_usuario' %}
+    <section class="painel formulario">
+        <h2>Novo Usuário</h2>
+        <form method="POST" action="{{ url_for('novo_usuario') }}">
+            <div class="linha-campos">
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                <br>
+                <div class="campo">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <br>
+                <div class="campo">
+                    <label for="senha_hash">Senha</label>
+                    <input type="text" id="senha_hash" name="senha_hash">
+                </div>
+            </div>
+            <br>
+                <div class="acoes-form">
+                    <button type="submit" class="botao">Cadastrar </button>
+                    <a href="{{ url_for('novo_usuario') }}" class="botao botao-secundario">Cancelar</a>
+                </div>
+        </form>
+    </section>
+    <br>
+    {% if not editar %}
+    <a href="{{ url_for('listar_usuarios') }}" class="botao"> Listar usuarios </a>
+    {% endif %}
+{% endif %}
+{% endblock conteudo %}

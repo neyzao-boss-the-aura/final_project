@@ -17,7 +17,6 @@ class Equipamento(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(50), nullable=False)
-    usuario = Column(String(50), default=0)
     quantidade = Column(Integer, default=0)
     nota_usuario = Column(String(300), default=0)
 
@@ -67,6 +66,9 @@ class Usuario(Base, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.senha_hash, password)
+
+    def __repr__(self):
+        return f"{self.nome}"
 
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)

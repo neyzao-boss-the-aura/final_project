@@ -22,16 +22,7 @@
                 </div>
                 <br>
                 <div class="campo">
-                    <label for="usuario">Usuário</label>
-                    <select name="usuario">
-                            {% for cadastro in cadastros %}
-                            <option value="{{ cadastro.id }}">{{ cadastro.nome }}</option>
-                            {% endfor %}
-                    </select>
-                </div>
-                <br>
-                <div class="campo">
-                    <label for="nota_usuario">Nota do Usuário</label>
+                    <label for="nota_usuario">Descrição do Usuário</label>
                     <input type="text" id="nota_usuario" name="nota_usuario">
                 </div>
             </div>
