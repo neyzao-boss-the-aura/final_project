@@ -165,8 +165,6 @@ def nova_ordem_servicos():
     if request.method == "POST":
         usuario = request.form.get("cliente", "").strip()
         responsavel = request.form.get("responsavel", "").strip()
-        equipamento = request.form.get("equipamento", "").strip()
-        recurso = request.form.get("recurso", "").strip()
         prioridade = request.form.get("prioridade", "").strip()
         estado = request.form.get("estado", "").strip()
         data_abertura = request.form.get("data_abertura", "").strip()
@@ -178,12 +176,6 @@ def nova_ordem_servicos():
             return redirect(url_for("nova_ordem_servicos"))
         if not responsavel:
             flash('Por favor, insira o nome do responsável', 'error')
-            return redirect(url_for("nova_ordem_servicos"))
-        if not equipamento:
-            flash('Por favor, insira o equipamento', 'error')
-            return redirect(url_for("nova_ordem_servicos"))
-        if not recurso:
-            flash('Por favor, insira o recurso', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not prioridade:
             flash('Por favor, insira a prioridade', 'error')
@@ -242,8 +234,6 @@ def novo_funcionario():
         if not estado:
             flash('Por favor, selecione o estado', 'error')
             return redirect(url_for("novo_funcionario"))
-
-        tabela
 
 if __name__ == "__main__":
     app.run(debug=True)
