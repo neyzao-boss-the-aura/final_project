@@ -14,7 +14,7 @@ def select_todos_funcionario():
     select(Funcionario)
 )
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
-    funcionario = db_session.execute(funcionarios_sql).all()
+    funcionario = db_session.execute(funcionarios_sql).scalars().all()
     return funcionario
 
 def salvar(nome, email, telefone, endereco, contratado_em, estado):
