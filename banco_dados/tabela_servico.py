@@ -13,7 +13,7 @@ def select_todos_ordem():
     ordens_sql = select (Ordem, Equipamento, Usuario, Recurso)
 
     # 2- Executar o select
-    ordens = db_session.execute(ordens_sql).all()
+    ordens = db_session.execute(ordens_sql).scalars().all()
     return ordens
 
 def salvar( responsavel, prioridade, estado, data_abertura, data_prazo, descricao):

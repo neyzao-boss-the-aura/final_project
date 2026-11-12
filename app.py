@@ -105,17 +105,18 @@ def registro():
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
     novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
-    return render_template("novo_equipamento.html", equipamentos=novo_equipamento)
+    print(novo_equipamento)
+    return render_template("listar_equipamentos.html", equipamentos=novo_equipamento)
 
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
     novo_recurso = tabela_recurso.select_todos_recursos()
-    return render_template("listar_recursos.html", novo_recurso=novo_recurso)
+    return render_template("listar_recursos.html", recursos=novo_recurso)
 
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
     nova_ordem_servicos = tabela_servico.select_todos_ordem()
-    return render_template("listar_ordem_servicos.html", nova_ordem_servicos=nova_ordem_servicos)
+    return render_template("listar_ordem_servicos.html", ordem_servicos=nova_ordem_servicos)
 
 @app.route("/equipamento/novo", methods=["GET", "POST"])
 def novo_equipamento():
@@ -139,7 +140,7 @@ def novo_equipamento():
 
     equipamentos_lista = tabela_equipamentos.select_todos_equipamentos()
     print(equipamentos_lista)
-    return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista)
+    return render_template("novo_equipamento.html", equipamentos=equipamentos_lista)
 
 @app.route("/funcionarios", methods=["GET", "POST"])
 def listar_funcionarios():

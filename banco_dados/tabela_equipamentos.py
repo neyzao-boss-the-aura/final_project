@@ -12,7 +12,7 @@ def select_todos_equipamentos():
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
     equipamentos_sql = select(Equipamento)
     # 2- Executar o select
-    equipamentos = db_session.execute(equipamentos_sql).all()
+    equipamentos = db_session.execute(equipamentos_sql).scalars().all()
     return equipamentos
 
 def salvar(nome, quantidade, nota_usuario):

@@ -13,7 +13,7 @@ def select_todos_recursos():
     select(Recurso)
 )
     # join(Tabela que eu quero juntar, condição = Chave estrangeira == Chave primária)
-    recursos = db_session.execute(recursos_sql).all()
+    recursos = db_session.execute(recursos_sql).scalars().all()
     return recursos
 
 def salvar(nome, responsavel, descricao):
