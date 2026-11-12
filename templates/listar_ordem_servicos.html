@@ -11,28 +11,30 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nome</th>
-                        <th>Quantidade</th>
-                        <th>Data agendada</th>
-                        <th>Descrição</th>
-                        <th>Atividade</th>
+                        <th>Responsável</th>
+                        <th>Prioridade</th>
+                        <th>Estado</th>
+                        <th>Data Abertura</th>
+                        <th>Data Prazo</th>
+                        <th>Descricão</th>
                     </tr>
                 </thead>
                     <tbody>
                         {%for ordem_servico in ordem_servicos%}
                             <tr>
                                 <td>{{ ordem_servico.id }}</td>
-                                <td>{{ ordem_servico.nome }}</td>
-                                <td>{{ ordem_servico.quantidade }}</td>
-                                <td>{{ ordem_servico.data_agendada }}</td>
-                                <td>{{ ordem_servico.descricao }}</td>
-                                <td>{{ ordem_servico.atividade }}</td>
+                                <td>{{ ordem_servico.responsavel }}</td>
+                                <td>{{ ordem_servico.prioridade }}</td>
+                                <td>{{ ordem_servico.estado }}</td>
+                                <td>{{ ordem_servico.data_abertura }}</td>
+                                <td>{{ ordem_servico.data_prazo }}</td>
+                                <td>{{ ordem_servico.descrição }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
             </table>
         {% else %}
-            <p class="vazio">Nenhuma pessoa cadastrada ainda</p>
+            <p class="vazio">Nenhuma OS cadastrada ainda</p>
         {% endif %}
 </section>
 {% if not editar %}

@@ -145,7 +145,7 @@ def novo_equipamento():
 @app.route("/funcionarios", methods=["GET", "POST"])
 def listar_funcionarios():
     novo_funcionario = tabela_funcionario.select_todos_funcionario()
-    return render_template("listar_funcionarios.html", novo_funcionario=novo_funcionario)
+    return render_template("listar_funcionarios.html", funcionarios=novo_funcionario)
 
 @app.route("/recurso/novo", methods=["GET", "POST"])
 def novo_recurso():
