@@ -51,6 +51,12 @@ def login():
         "login.html",
         registro= request.args.get("registro") == 'True')
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
+
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
     if request.method == "POST":
