@@ -6,7 +6,7 @@
 <section class="painel">
     <form method="POST" action="{{ url_for('listar_equipamentos') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
-        {% if request.endpoint == 'listar_equipamentos' %}
+        {% if equipamentos %}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
                 <thead>

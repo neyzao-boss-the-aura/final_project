@@ -9,23 +9,18 @@ from database import db_session, Ordem, Equipamento, Usuario, Recurso
 def select_todos_ordem():
     # Buscar todos as OS no banco
     # 1- Montar o select
-    ordens_sql = (
-    select(Ordem, Equipamento, Usuario, Recurso)
-    .join(Usuario, Ordem.usuario == Usuario.id)
-    .join(Equipamento, Ordem.equipamento == Equipamento.id)
-    .join(Recurso, Ordem.recurso == Recurso.id)
-    )
+
+    ordens_sql = select (Ordem, Equipamento, Usuario, Recurso)
 
     # 2- Executar o select
     ordens = db_session.execute(ordens_sql).all()
     return ordens
 
-def salvar(usuario, responsavel, equipamento, recurso, prioridade, estado, data_abertura, data_prazo, descricao):
+def salvar( responsavel, prioridade, estado, data_abertura, data_prazo, descricao):
     # 3- Salvar no banco
     try:
         nova_ordem = Ordem(
-            usuario=usuario, responsavel=responsavel,
-            equipamento=equipamento, recurso=recurso,
+            responsavel=responsavel,
             prioridade=prioridade, estado=estado,
             data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
         db_session.add(nova_ordem)

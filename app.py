@@ -95,15 +95,10 @@ def registro():
             return redirect (url_for("registro"))
         return render_template("login.html")
 
-@app.route("/cadastros", methods=["GET", "POST"])
-def listar_usuarios():
-    novo_usuario = tabela_usuario.select_todos_usuarios()
-    return render_template("listar_usuarios.html", novo_usuario=novo_usuario)
-
 @app.route("/equipamentos", methods=["GET", "POST"])
 def listar_equipamentos():
     novo_equipamento = tabela_equipamentos.select_todos_equipamentos()
-    return render_template("novo_equipamento.html", novo_equipamento=novo_equipamento)
+    return render_template("novo_equipamento.html", equipamentos=novo_equipamento)
 
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
@@ -112,6 +107,8 @@ def listar_recursos():
 
 @app.route("/usuarios", methods=["GET", "POST"])
 def listar_usuarios():
+    novo_usuario = tabela_usuario.select_todos_usuarios()
+    return render_template("listar_usuarios.html", novo_usuario=novo_usuario)
 
 @app.route("/ordem_servicos", methods=["GET", "POST"])
 def listar_ordem_servicos():
@@ -142,7 +139,7 @@ def novo_equipamento():
     usuarios_lista = tabela_usuario.select_todos_usuarios()
     print(equipamentos_lista)
     print(usuarios_lista)
-    return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista, usuarios=usuarios_lista)
+    return render_template("listar_equipamentos.html", equipamentos=equipamentos_lista)
 
 @app.route("/recurso/novo", methods=["GET", "POST"])
 def novo_recurso():
@@ -222,12 +219,12 @@ def nova_ordem_servicos():
     print(novo_usuario)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos, novo_recurso=novo_recurso, novo_equipamento=novo_equipamento, novo_usuario=novo_usuario)
 
-@app.route("/usuario/novo", methods=["GET", "POST"])
+@app.route("/usuario/novo1", methods=["GET", "POST"])
 def novo_usuario():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
         email = request.form.get("email", "").strip()
-        senha_hash = request.form.get("senha", "").strip()
+        senha_hash = request.form.get("senha_hash", "").strip()
 
         if not nome:
             flash("Digite o nome", "error")
@@ -236,7 +233,7 @@ def novo_usuario():
             flash("Digite o email", "error")
             return redirect(url_for("novo_usuario"))
         if not senha_hash:
-            flash("Digite o senha", "error")
+            flash("Digite a senha", "error")
             return redirect(url_for("novo_usuario"))
 
         tabela_usuario.salvar(nome=nome, email=email, senha_hash=senha_hash)
