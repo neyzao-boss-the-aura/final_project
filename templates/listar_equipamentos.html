@@ -4,7 +4,6 @@
 <h1>Equipamentos</h1>
 {% if request.endpoint == 'novo_equipamento' %}
 <section class="painel">
-    <form method="POST" action="{{ url_for('listar_equipamentos') }}">
         <h2>Lista dos equipamentos cadastrados </h2>
         {% if equipamentos %}
             <table>
@@ -32,7 +31,6 @@
         {% else %}
             <p class="vazio">Nenhum equipamento cadastrado ainda</p>
         {% endif %}
-    </form>
 </section>
 {% endif %}
 {% if not editar %}

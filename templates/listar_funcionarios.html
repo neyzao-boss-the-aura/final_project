@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h1>Funcionários</h1>
+{% if request.endpoint == 'novo_funcionario' %}
+<section class="painel">
+        <h2>Lista dos funcionários cadastrados </h2>
+        {% if funcionarios %}
+            <table>
+    <!-- "thead" serve como cabeçalho e "tbody" como informação-->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Endereço</th>
+                        <th>Contratado em</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        {%for funcionario in funcionarios%}
+                            <tr>
+                                <td>{{ funcionario.id }}</td>
+                                <td>{{ funcionario.nome }}</td>
+                                <td>{{ funcionario.email }}</td>
+                                <td>{{ funcionario.telefone }}</td>
+                                <td>{{ funcionario.endereco }}</td>
+                                <td>{{ funcionario.contratado_em }}</td>
+                                <td>{{ funcionario.estado }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        {% else %}
+            <p class="vazio">Nenhum funcionário cadastrado ainda</p>
+        {% endif %}
+</section>
+{% endif %}
+{% if not editar %}
+<a href="{{ url_for('listar_funcionario') }}" class="botao"> Cadastrar funcionário </a>
+{% endif %}
+{% endblock conteudo %}

@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, datetime
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime, Date
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker, scoped_session
 from sqlalchemy.sql import func
@@ -54,8 +54,8 @@ class Usuario(Base, UserMixin):
     nome = Column(String(50), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     senha_hash = Column(String(255), nullable=False)
-    atualizado_em = Column(DateTime, onupdate=func.now())
-    criado_em = Column(DateTime, onupdate=func.now())
+    criado_em = Column(DateTime, default=datetime.now)
+    atualizado_em = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
     #Senha
     def set_password(self, password):
