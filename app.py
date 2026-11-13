@@ -13,8 +13,6 @@ app.secret_key = "chave-secreta-projeto-2026"
 
 # PENDÊNCIAS: EDITAR,
 
-
-
 @app.route("/")
 @login_required
 def inicio ():
