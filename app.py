@@ -13,8 +13,8 @@ app.secret_key = "chave-secreta-projeto-2026"
 
 
 
-# SITUAÇÃO ATUAL: CONFIGURANDO O EDITAR
-# PENDÊNCIAS: TERMINAR HTML DOS FORMULÁRIOS COM LISTAS,
+# SITUAÇÃO ATUAL: CONFIGURANDO O EDITAR NO HTML
+# PENDÊNCIAS: TERMINAR HTML DOS FORMULÁRIOS COM LISTAS E EDITAR,
 # DETALHES E RELATÓRIO, CHAVES ESTRANGEIRAS DO BANCO COM LISTAS AUXILIARES
 
 
@@ -140,7 +140,7 @@ def listar_ordem_servicos():
     return render_template("listar_ordem_servicos.html", ordem_servicos=nova_ordem_servicos)
 
 @app.route("/equipamento/novo", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -165,7 +165,7 @@ def novo_equipamento():
     return render_template("novo_equipamento.html", equipamentos=equipamentos_lista)
 
 @app.route("/equipamentos/<id_equipamento>", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def editar_equipamento(id_equipamento):
     #Buscar o jogador no banco
     equipamento = tabela_equipamentos.select_um_equipamento(id_equipamento)
@@ -193,7 +193,7 @@ def editar_equipamento(id_equipamento):
     return render_template("listar_equipamentos.html", equipamentos=equipamentos, editar = editar_equipamento)
 
 @app.route("/recurso/novo", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def novo_recurso():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -218,7 +218,7 @@ def novo_recurso():
     return render_template("novo_recurso.html", novo_recurso=recursos)
 
 @app.route("/recursos/<id_recurso>", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def editar_recurso(id_recurso):
     #Buscar o jogador no banco
     recurso = tabela_recurso.select_um_recurso(id_recurso)
@@ -246,7 +246,7 @@ def editar_recurso(id_recurso):
     return render_template("listar_recursos.html", recursos=recursos, editar = editar_recurso)
 
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def nova_ordem_servicos():
     if request.method == "POST":
         responsavel = request.form.get("responsavel", "").strip()
@@ -282,8 +282,8 @@ def nova_ordem_servicos():
     print(nova_ordem_servicos)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
 
-@app.route("/ordem_servicos/<id_ordem_servico>", methods=["GET", "POST"])
-@roles_required("admin")
+@app.route("/ordem_servicos_editar/<id_ordem_servico>", methods=["GET", "POST"])
+#@roles_required("admin")
 def editar_ordem_servicos(id_ordem_servico):
     #Buscar o jogador no banco
     ordem_servico = tabela_servico.select_um_ordem_servico(id_ordem_servico)
@@ -323,7 +323,7 @@ def editar_ordem_servicos(id_ordem_servico):
     return render_template("listar_ordem_servicos.html", ordem_servicos=ordem_servicos, editar = editar_ordem_servicos)
 
 @app.route("/funcionario/novo", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def novo_funcionario():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -360,7 +360,7 @@ def novo_funcionario():
     return render_template("novo_funcionario.html", funcionarios=funcionarios)
 
 @app.route("/funcionarios/<id_funcionario>", methods=["GET", "POST"])
-@roles_required("admin")
+#@roles_required("admin")
 def editar_funcionarios(id_funcionario):
     #Buscar o jogador no banco
     funcionario = tabela_funcionario.select_um_funcionario(id_funcionario)

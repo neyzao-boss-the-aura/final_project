@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class="cabecalho-pagina">
+    <div>
+        <h1>Ordem de serviço</h1>
+        <p class="subtitulo"></p>
+    </div>
+</div>
+
+<section class="painel formulario">
+    <h2>Editar Ordem de Serviço #{{ ordem.id }}</h2>
+
+    <form method="POST" action="{{ url_for('editar_ordem_servicos', id_ordem_servico=ordem.id) }}">
+        <div class="linha-campos">
+            <br>
+            <div class="campo">
+                <label for="responsavel">Responsável</label>
+                <input type="text" id="responsavel" name="responsavel" value="{{ ordem.responsavel }}" required>
+            </div>
+            <br>
+            <div class="campo">
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" name="prioridade">
+                    <option value="Alta" {% if ordem.prioridade == 'Alta' %}selected{% endif %}>Alta</option>
+                    <option value="Média" {% if ordem.prioridade == 'Média' %}selected{% endif %}>Média</option>
+                    <option value="Baixa" {% if ordem.prioridade == 'Baixa' %}selected{% endif %}>Baixa</option>
+                </select>
+            </div>
+            <br>
+            <div class="campo">
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado">
+                    <option value="Concluído" {% if ordem.estado == 'Concluído' %}selected{% endif %}>Concluído</option>
+                    <option value="Em processo" {% if ordem.estado == 'Em processo' %}selected{% endif %}>Em processo</option>
+                    <option value="Não iniciado" {% if ordem.estado == 'Não iniciado' %}selected{% endif %}>Não iniciado</option>
+                </select>
+            </div>
+            <br>
+            <div class="campo">
+                <label for="data_abertura">Início</label>
+                <input type="date" id="data_abertura" name="data_abertura" value="{{ ordem.data_abertura }}" required>
+            </div>
+            <br>
+            <div class="campo">
+                <label for="data_prazo">Prazo</label>
+                <input type="date" id="data_prazo" name="data_prazo" value="{{ ordem.data_prazo }}" required>
+            </div>
+            <br>
+            <div class="campo">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" name="descricao" value="{{ ordem.descricao }}">
+            </div>
+        </div>
+        <br>
+        <div class="acoes-form">
+            <button type="submit" class="botao">Salvar Alterações</button>
+            <a href="{{ url_for('listar_ordem_servicos') }}" class="botao botao-secundario">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock conteudo %}
