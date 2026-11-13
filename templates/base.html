@@ -35,10 +35,11 @@
                     <a href="{{ url_for('listar_funcionarios') }}">
                     <span class="icone">👥</span> Funcionários
                     </a>
-
-                    <a href="{{ url_for('logout') }}">
-                       <span class="icone">⇨</span> Sair [{{ current_user.nome }}]
-                    </a>
+             </div>
+         <div class="logout" >
+                        <a href="{{ url_for('logout') }}">
+                        <span class="icone">⇨</span> Sair [{{ current_user.nome }}]
+                        </a>
          </div>
     </div>
     {% endif %}

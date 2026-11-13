@@ -39,7 +39,7 @@ def roles_required (*papeis_permitidos):
         @wraps(f)
         @login_required
         def decorated_function(*args, **kwargs):
-            if current_user.papelnot in papeis_permitidos:
+            if current_user.papel not in papeis_permitidos:
                 flash("Acesso negado: Você não tem permissão para acessar esta página", "error")
                 return redirect(url_for("inicio"))
             return f(*args, **kwargs)
