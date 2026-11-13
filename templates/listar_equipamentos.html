@@ -13,6 +13,8 @@
                         <th>Nome</th>
                         <th>Quantidade</th>
                         <th>Nota do Usuário</th>
+                        <th>Ações</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +24,9 @@
                             <td>{{ equipamento.nome }}</td>
                             <td>{{ equipamento.quantidade }}</td>
                             <td>{{ equipamento.nota_usuario }}</td>
+                            <td>
+                                <a href="{{ url_for('editar_equipamento', id_equipamento=equipamento.id) }}">Editar </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

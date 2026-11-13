@@ -35,3 +35,8 @@ def salvar( responsavel, prioridade, estado, data_abertura, data_prazo, descrica
         db_session.rollback()
         flash("Ocorreu um erro, tente novamente", "error")
         print(f"Erro: {e}")
+
+def select_um_ordem_servico(id_ordem_servico):
+    ordem_servico_sql = select(Ordem).where(Ordem.id == id_ordem_servico)
+    ordem_servico = db_session.execute(ordem_servico_sql).scalar_one_or_none()
+    return ordem_servico

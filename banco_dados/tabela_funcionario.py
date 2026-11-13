@@ -33,3 +33,8 @@ def salvar(nome, email, telefone, endereco, contratado_em, estado):
         db_session.rollback()
         flash("Ocorreu um erro, tente novamente", "error")
         print(f"Erro: {e}")
+
+def select_um_funcionario(id_funcionario):
+    funcionario_sql = select(Funcionario).where(Funcionario.id == id_funcionario)
+    funcionario = db_session.execute(funcionario_sql).scalar_one_or_none()
+    return funcionario

@@ -32,3 +32,8 @@ def salvar(nome, responsavel, descricao):
         db_session.rollback()
         flash("Ocorreu um erro, tente novamente", "error")
         print(f"Erro: {e}")
+
+def select_um_recurso(id_recurso):
+    recurso_sql = select(Recurso).where(Recurso.id == id_recurso)
+    recurso = db_session.execute(recurso_sql).scalar_one_or_none()
+    return recurso

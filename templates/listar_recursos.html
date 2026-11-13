@@ -19,6 +19,7 @@
                         <th> Nome </th>
                         <th> Responsável </th>
                         <th> Descrição </th>
+                        <th> Ações </th>
                     </tr>
                 </thead>
                     <tbody>
@@ -28,6 +29,9 @@
                                 <td>{{ recurso.nome }}</td>
                                 <td>{{ recurso.responsavel }}</td>
                                 <td>{{ recurso.descricao }}</td>
+                                <td>
+                                    <a href="{{ url_for('editar_recurso', id_recurso=recurso.id) }}">Editar </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

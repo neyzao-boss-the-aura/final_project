@@ -11,7 +11,13 @@ from templates import *
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
-# PENDÊNCIAS: EDITAR,
+
+
+# SITUAÇÃO ATUAL: CONFIGURANDO O EDITAR
+# PENDÊNCIAS: TERMINAR HTML DOS FORMULÁRIOS COM LISTAS,
+# DETALHES E RELATÓRIO, CHAVES ESTRANGEIRAS DO BANCO COM LISTAS AUXILIARES
+
+
 
 @app.route("/")
 @login_required
@@ -158,6 +164,34 @@ def novo_equipamento():
     print(equipamentos_lista)
     return render_template("novo_equipamento.html", equipamentos=equipamentos_lista)
 
+@app.route("/equipamentos/<id_equipamento>", methods=["GET", "POST"])
+@roles_required("admin")
+def editar_equipamento(id_equipamento):
+    #Buscar o jogador no banco
+    equipamento = tabela_equipamentos.select_um_equipamento(id_equipamento)
+    #Salvar as alterações
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        quantidade = request.form.get("quantidade") or None
+        nota_usuario = request.form.get("nota_usuario", "").strip()
+
+        # 2- Verificar se foi digitado
+        if not nome:
+            flash("PREENCHA O NOME", "error")
+        elif not quantidade:
+            flash("PREENCHA A QUANTIDADE", "error")
+        elif not nota_usuario:
+            flash("PREENCHA A NOTA DO USUÁRIO", "error")
+        else:
+            equipamento.nome = nome
+            equipamento.quantidade = quantidade
+            equipamento.nota_usuario = nota_usuario
+            db_session.commit()
+
+    #Carregar as informações
+    equipamentos = tabela_equipamentos.select_todos_equipamentos()
+    return render_template("listar_equipamentos.html", equipamentos=equipamentos, editar = editar_equipamento)
+
 @app.route("/recurso/novo", methods=["GET", "POST"])
 @roles_required("admin")
 def novo_recurso():
@@ -182,6 +216,34 @@ def novo_recurso():
     recursos = tabela_recurso.select_todos_recursos()
     print(recursos)
     return render_template("novo_recurso.html", novo_recurso=recursos)
+
+@app.route("/recursos/<id_recurso>", methods=["GET", "POST"])
+@roles_required("admin")
+def editar_recurso(id_recurso):
+    #Buscar o jogador no banco
+    recurso = tabela_recurso.select_um_recurso(id_recurso)
+    #Salvar as alterações
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        responsavel = request.form.get("responsavel") or None
+        descricao = request.form.get("descricao", "").strip()
+
+        # 2- Verificar se foi digitado
+        if not nome:
+            flash("PREENCHA O NOME", "error")
+        elif not responsavel:
+            flash("PREENCHA O RESPONSÁVEL", "error")
+        elif not descricao:
+            flash("PREENCHA A DESCRIÇÃO", "error")
+        else:
+            recurso.nome = nome
+            recurso.responsavel = responsavel
+            recurso.descricao = descricao
+            db_session.commit()
+
+    #Carregar as informações
+    recursos = tabela_recurso.select_todos_recursos()
+    return render_template("listar_recursos.html", recursos=recursos, editar = editar_recurso)
 
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
 @roles_required("admin")
@@ -220,6 +282,46 @@ def nova_ordem_servicos():
     print(nova_ordem_servicos)
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
 
+@app.route("/ordem_servicos/<id_ordem_servico>", methods=["GET", "POST"])
+@roles_required("admin")
+def editar_ordem_servicos(id_ordem_servico):
+    #Buscar o jogador no banco
+    ordem_servico = tabela_servico.select_um_ordem_servico(id_ordem_servico)
+    #Salvar as alterações
+    if request.method == "POST":
+        responsavel = request.form.get("responsavel", "").strip()
+        prioridade = request.form.get("prioridade", "").strip()
+        estado = request.form.get("estado", "").strip()
+        data_abertura = request.form.get("data_abertura", "").strip()
+        data_prazo = request.form.get("data_prazo", "").strip()
+        descricao = request.form.get("descricao", "").strip()
+
+        # 2- Verificar se foi digitado
+        if not responsavel:
+            flash('Por favor, insira o nome do responsável', 'error')
+        if not prioridade:
+            flash('Por favor, insira a prioridade', 'error')
+        if not estado:
+            flash('Por favor, selecione o status da OS', 'error')
+        if not data_abertura:
+            flash('Por favor, insira a data de abertura', 'error')
+        if not data_prazo:
+            flash('Digite a data do prazo', 'error')
+        if not descricao:
+            flash('Digite a descrição da OS', 'error')
+        else:
+            ordem_servico.responsavel = responsavel
+            ordem_servico.prioridade = prioridade
+            ordem_servico.estado = estado
+            ordem_servico.data_abertura = data_abertura
+            ordem_servico.data_prazo = data_prazo
+            ordem_servico.descricao = descricao
+            db_session.commit()
+
+    #Carregar as informações
+    ordem_servicos = tabela_servico.select_todos_ordem()
+    return render_template("listar_ordem_servicos.html", ordem_servicos=ordem_servicos, editar = editar_ordem_servicos)
+
 @app.route("/funcionario/novo", methods=["GET", "POST"])
 @roles_required("admin")
 def novo_funcionario():
@@ -256,6 +358,45 @@ def novo_funcionario():
     funcionarios = tabela_funcionario.select_todos_funcionario()
     print(funcionarios)
     return render_template("novo_funcionario.html", funcionarios=funcionarios)
+
+@app.route("/funcionarios/<id_funcionario>", methods=["GET", "POST"])
+@roles_required("admin")
+def editar_funcionarios(id_funcionario):
+    #Buscar o jogador no banco
+    funcionario = tabela_funcionario.select_um_funcionario(id_funcionario)
+    #Salvar as alterações
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        email = request.form.get("email", "").strip()
+        telefone = request.form.get("telefone", "").strip()
+        endereco = request.form.get("endereco", "").strip()
+        contratado_em = request.form.get("contratado_em", "").strip()
+        estado = request.form.get("estado", "").strip()
+
+        if not nome:
+            flash('Por favor, insira o nome', 'error')
+        if not email:
+            flash('Por favor, insira o email', 'error')
+        if not telefone:
+            flash('Por favor, insira o telefone', 'error')
+        if not endereco:
+            flash('Por favor, insira o endereco', 'error')
+        if not contratado_em:
+            flash('Por favor, insira o contratado em', 'error')
+        if not estado:
+            flash('Por favor, selecione o estado', 'error')
+        else:
+            funcionario.nome = nome
+            funcionario.email = email
+            funcionario.telefone = telefone
+            funcionario.endereco = endereco
+            funcionario.contratado_em = contratado_em
+            funcionario.estado = estado
+            db_session.commit()
+
+    #Carregar as informações
+    funcionarios = tabela_funcionario.select_todos_funcionario()
+    return render_template("listar_funcionarios.html", funcionarios=funcionarios, editar = editar_funcionarios)
 
 if __name__ == "__main__":
     app.run(debug=True)
