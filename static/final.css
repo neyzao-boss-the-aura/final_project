@@ -22,8 +22,9 @@ body {
 .titulo {
     color: white;
     font-family: Constantia, serif;
-    font-size: xx-large;
-    margin-bottom: 5px;
+    font-size: 40px;
+    margin-bottom: -2px;
+    margin-top: -25px;
 }
 main {
     padding: 30px;
@@ -63,7 +64,7 @@ main {
     font-family: Constantia, serif;
     font-size: 18px;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 45px;
     font-weight: bold;
 }
 
@@ -74,6 +75,7 @@ main {
     text-decoration: none;
     margin-right: 20px;
     line-weight: bold;
+    font-weight: bolder;
 }
 
 nav a:hover {
@@ -81,9 +83,9 @@ nav a:hover {
 }
 
 .pai {
-    background-color: #c3c2c2;
+    background-color: whitesmoke;
     margin-block: 0.1px;
-    border: 3px solid #636262;
+    border: 3px ghostwhite ;
     width: 100%;
     height: auto;
     text-align: center;
@@ -94,7 +96,7 @@ nav a:hover {
 }
 
 .image_gc {
-    width:70px;
-    height: 60px;
+    width:90px;
+    height: 90px;
     margin: auto;
 }
