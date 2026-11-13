@@ -67,8 +67,8 @@ main {
     font-weight: bold;
 }
 
-.logout {
-    color: red;
+.logout a {
+    color: #b81414;
     font-family: Constantia, serif;
     font-size: 18px;
     text-decoration: none;
