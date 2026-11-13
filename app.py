@@ -11,13 +11,12 @@ from templates import *
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
-oii
 
 
 # SITUAÇÃO ATUAL: CONFIGURANDO O EDITAR NO HTML
 # PENDÊNCIAS: TERMINAR HTML DOS FORMULÁRIOS COM LISTAS E EDITAR,
 # DETALHES E RELATÓRIO, CHAVES ESTRANGEIRAS DO BANCO COM LISTAS AUXILIARES
-
+# CADASTRAR USUÁRIOS DENTRO DA APP
 
 
 @app.route("/")
