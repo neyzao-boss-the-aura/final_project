@@ -31,3 +31,8 @@ def salvar(nome, quantidade, nota_usuario):
         db_session.rollback()
         flash("Ocorreu um erro, tente novamente", "error")
         print(f"Erro: {e}")
+
+def select_um_equipamento(id_equipamento):
+    equipamento_sql = select(Equipamento).where(Equipamento.id == id_equipamento)
+    equipamento = db_session.execute(equipamento_sql).scalar_one_or_none()
+    return equipamento
