@@ -11,7 +11,7 @@ from templates import *
 app = Flask(__name__)
 app.secret_key = "chave-secreta-projeto-2026"
 
-
+# oi
 
 # PENDÊNCIAS: EDITAR,
 

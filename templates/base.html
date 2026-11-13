@@ -16,41 +16,29 @@
     {% if current_user.id %}
     <div class="pai">
          <div class="nav">
-                    <li>
                     <a href="{{ url_for('inicio') }}">
                     <span class="icone"></span> Inicio
                     </a>
-                    </li>
 
-                    <li>
                     <a href="{{ url_for('listar_equipamentos') }}">
                     <span class="icone">🛠</span> Equipamentos
                     </a>
-                    </li>
 
-                    <li>
                     <a href="{{ url_for('listar_recursos') }}">
                     <span class="icone">⏣</span> Recursos
                     </a>
-                    </li>
 
-                    <li>
                     <a href="{{ url_for('listar_ordem_servicos') }}">
                     <span class="icone">🗒</span> Ordem de Serviço
                     </a>
-                    </li>
 
-                    <li>
                     <a href="{{ url_for('listar_funcionarios') }}">
-                    <span class="icone">🧑</span> Funcionários
+                    <span class="icone"></span> Funcionários
                     </a>
-                    </li>
 
-                    <li>
                     <a href="{{ url_for('logout') }}">
                        <span class="icone">🚪</span> Sair [{{ current_user.nome }}]
                     </a>
-                    </li>
          </div>
     </div>
     {% endif %}
