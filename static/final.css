@@ -61,6 +61,7 @@ nav a:hover {
     display: flex;
     align-content: baseline;
     justify-content: center;
+    flex-direction: row;
 }
 
 .image_gc {
