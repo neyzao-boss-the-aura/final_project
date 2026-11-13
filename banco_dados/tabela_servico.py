@@ -4,13 +4,13 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.elements import or_
 
-from database import db_session, Ordem, Equipamento, Usuario, Recurso
+from database import db_session, Ordem
 
 def select_todos_ordem():
     # Buscar todos as OS no banco
     # 1- Montar o select
 
-    ordens_sql = select (Ordem, Equipamento, Usuario, Recurso)
+    ordens_sql = select (Ordem)
 
     # 2- Executar o select
     ordens = db_session.execute(ordens_sql).scalars().all()
