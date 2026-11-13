@@ -63,7 +63,7 @@ main {
 form {
     padding: 15px;
     width: 600px;
-    height: 250px;
+    height: auto;
     margin: 0 auto;
     border: 5px ridge #b81414;
     background-color: whitesmoke;
@@ -128,4 +128,26 @@ input {
     border-color: black;
     width: 350px;
     height: 35px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid black;
+    font-size: 0.9rem;
+}
+
+th{
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.03rem;
+
 }
