@@ -17,6 +17,7 @@
                         <th>Endereço</th>
                         <th>Contratado em</th>
                         <th>Estado</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -30,6 +31,9 @@
                                 <td>{{ funcionario.endereco }}</td>
                                 <td>{{ funcionario.contratado_em }}</td>
                                 <td>{{ funcionario.estado }}</td>
+                                <td>
+                                    <a href="{{ url_for('editar_funcionario', id_funcionario=funcionario.id) }}">Editar </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

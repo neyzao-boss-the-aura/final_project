@@ -17,6 +17,7 @@
                         <th>Data Abertura</th>
                         <th>Data Prazo</th>
                         <th>Descricão</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -29,6 +30,9 @@
                                 <td>{{ ordem_servico.data_abertura }}</td>
                                 <td>{{ ordem_servico.data_prazo }}</td>
                                 <td>{{ ordem_servico.descrição }}</td>
+                                <td>
+                                    <a href="{{ url_for('editar_ordem_servico', id_ordem_servico=ordem_servico.id) }}">Editar </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
