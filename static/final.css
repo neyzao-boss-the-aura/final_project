@@ -26,6 +26,7 @@ body {
     margin-bottom: -2px;
     margin-top: -25px;
 }
+
 main {
     padding: 50px 0 50px 0;
     max-width: 900px;
@@ -37,7 +38,6 @@ main {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-
 }
 
 .titulo_login {
@@ -66,13 +66,10 @@ form {
     height: auto;
     margin: 0 auto;
     border: 5px ridge #b81414;
-    background-color: whitesmoke;
+    background-color: #ffecea;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-}
-.titulo_prin{
-
 }
 
 .nav a {
@@ -130,10 +127,11 @@ input {
     height: 35px;
 }
 
-table{
+table {
     width: 100%;
     border-collapse: collapse;
     margin: 8px;
+
 }
 
 th, td {
@@ -143,11 +141,68 @@ th, td {
     font-size: 0.9rem;
 }
 
-th{
+th {
     color: black;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.03rem;
+}
+
+.botao3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.botao3 a {
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border: darkred;
+    color: #b81414;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.titulos_elementos {
+
+}
+
+button  {
+    background-color: #b81414;
+    color: white;
+    border-radius: 5px;
+    border: darkred;
+    width: 100px;
+    height: 30px;
+    font-family: Constantia, sans-serif;
+}
+
+.botao4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.botao4 a {
+    width: auto;
+    height: auto;
+    background-color: #b81414;
+    border-radius: 1px;
+    border: darkred;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }

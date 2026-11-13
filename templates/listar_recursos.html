@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+    <div class="botao4">
+        <a href="{{ url_for('novo_recurso') }}" >Cadastrar recurso</a>
+    </div>
     <div class="cabecalho-pagina">
         <div>
             <h1>Recursos</h1>
             <p class="subtitulo"></p>
         </div>
     </div>
+
     {% if request.endpoint == 'listar_recursos' %}
     <section class="painel">
         <h2>Lista dos recursos cadastrados </h2>
@@ -40,9 +44,7 @@
             <p class="vazio">Nenhum recurso cadastrado ainda</p>
         {% endif %}
     </section>
-    {% if not editar %}
-    <a href="{{ url_for('novo_recurso') }}" class="botao"> Cadastrar recurso </a>
-    {% endif %}
+
     {% endif %}
 
 {% endblock conteudo %}

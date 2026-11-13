@@ -7,7 +7,6 @@
         <h2> Bem vindo (a)! </h2>
         <p>Faça seu Login. Caso não tenha uma conta já registrada, cadastre-se hoje na GEMS!</p>
     </div>
-</div>
    <section class="painel formulario">
             {% if registro %}
                 <form method="POST" action="{{ url_for('registro') }}">
@@ -25,10 +24,10 @@
                         <input type="password" id="senha" name="senha" required>
                         <br>
 
-                    <div class="acoes-form">
                         <button type="submit" class="botao">Cadastrar</button>
-                        <a href="{{ url_for('login') }}" class="botao botao-secundario">Já tenho conta</a>
-                    </div>
+                        <div class="botao3">
+                        <a href="{{ url_for('login') }}" class="botao">Já tenho conta</a>
+                        </div>
                 </form>
             {% else %}
                 <form method="POST" action="{{ url_for('login') }}">
@@ -42,10 +41,10 @@
                         <input type="password" id="senha" name="senha" required>
                         <br>
 
-                    <div class="acoes-form">
                         <button type="submit" class="botao">Entrar</button>
-                        <a href="{{ url_for('login', registro=True) }}" class="botao botao-secundario">Criar Conta</a>
-                    </div>
+                        <div class="botao3">
+                            <a href="{{ url_for('login', registro=True) }}" class="botao">Criar Conta</a>
+                        </div>
                 </form>
             {% endif %}
     </section>
