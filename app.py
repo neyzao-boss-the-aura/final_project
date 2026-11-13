@@ -46,7 +46,7 @@ def roles_required (*papeis_permitidos):
         return decorated_function
     return decorator
 
-#Interface de autenticação
+#Interface de autenticação a
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
