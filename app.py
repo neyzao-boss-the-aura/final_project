@@ -4,6 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from banco_dados import tabela_equipamentos, tabela_servico, tabela_recurso, tabela_funcionario
 from database import *
+from functools import wraps
 from datetime import datetime
 from templates import *
 
@@ -12,7 +13,7 @@ app.secret_key = "chave-secreta-projeto-2026"
 
 
 
-# PENDÊNCIAS: LISTAR NA APP, EDITAR,
+# PENDÊNCIAS: EDITAR,
 
 
 
@@ -35,6 +36,19 @@ def shutdown_session(exception=None):
 @login_manager.user_loader
 def load_user(user_id):
     return db_session.get(Usuario, int(user_id))
+
+def roles_required (*papeis_permitidos):
+    # Decorator para restringir acesso baseado no papel do usuário logado
+    def decorator(f):
+        @wraps(f)
+        @login_required
+        def decorated_function(*args, **kwargs):
+            if current_user.papelnot in papeis_permitidos:
+                flash("Acesso negado: Você não tem permissão para acessar esta página", "error")
+                return redirect(url_for("inicio"))
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
 #Interface de autenticação
 @app.route("/login", methods=["GET", "POST"])
@@ -108,6 +122,11 @@ def listar_equipamentos():
     print(novo_equipamento)
     return render_template("listar_equipamentos.html", equipamentos=novo_equipamento)
 
+@app.route("/funcionarios", methods=["GET", "POST"])
+def listar_funcionarios():
+    novo_funcionario = tabela_funcionario.select_todos_funcionario()
+    return render_template("listar_funcionarios.html", funcionarios=novo_funcionario)
+
 @app.route("/recursos", methods=["GET", "POST"])
 def listar_recursos():
     novo_recurso = tabela_recurso.select_todos_recursos()
@@ -119,6 +138,7 @@ def listar_ordem_servicos():
     return render_template("listar_ordem_servicos.html", ordem_servicos=nova_ordem_servicos)
 
 @app.route("/equipamento/novo", methods=["GET", "POST"])
+@roles_required("admin")
 def novo_equipamento():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -142,12 +162,8 @@ def novo_equipamento():
     print(equipamentos_lista)
     return render_template("novo_equipamento.html", equipamentos=equipamentos_lista)
 
-@app.route("/funcionarios", methods=["GET", "POST"])
-def listar_funcionarios():
-    novo_funcionario = tabela_funcionario.select_todos_funcionario()
-    return render_template("listar_funcionarios.html", funcionarios=novo_funcionario)
-
 @app.route("/recurso/novo", methods=["GET", "POST"])
+@roles_required("admin")
 def novo_recurso():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -172,6 +188,7 @@ def novo_recurso():
     return render_template("novo_recurso.html", novo_recurso=recursos)
 
 @app.route("/ordem_servicos/nova", methods=["GET", "POST"])
+@roles_required("admin")
 def nova_ordem_servicos():
     if request.method == "POST":
         responsavel = request.form.get("responsavel", "").strip()
@@ -208,6 +225,7 @@ def nova_ordem_servicos():
     return render_template("nova_ordem_servico.html", nova_ordem_servicos=nova_ordem_servicos)
 
 @app.route("/funcionario/novo", methods=["GET", "POST"])
+@roles_required("admin")
 def novo_funcionario():
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -242,5 +260,6 @@ def novo_funcionario():
     funcionarios = tabela_funcionario.select_todos_funcionario()
     print(funcionarios)
     return render_template("novo_funcionario.html", funcionarios=funcionarios)
+
 if __name__ == "__main__":
     app.run(debug=True)
