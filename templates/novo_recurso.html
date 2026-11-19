@@ -2,14 +2,12 @@
 
 {% block conteudo %}
     <div class="cabecalho-pagina">
-        <div>
-            <h1>Recursos</h1>
-            <p class="subtitulo"></p>
-        </div>
     </div>
 {% if request.endpoint == 'novo_recurso' %}
     <section class="painel formulario">
-        <h2>Novo Recurso</h2>
+        <div class="titulos_cadastros">
+            Novo Recurso
+        </div>
         <form method="POST" action="{{ url_for('novo_recurso') }}">
             <div class="linha-campos">
                 <div class="campo">
