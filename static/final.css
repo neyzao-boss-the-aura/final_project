@@ -14,9 +14,8 @@ body {
     height: auto;
     width: auto;
     padding: 30px;
-    background-color: #b81414;
-    justify-content: flex-start;
-    font-weight: bolder;
+    background-image: url("/static/header2.png");
+    justify-content: flex-start;    font-weight: bolder;
 }
 
 .titulo {
@@ -89,11 +88,35 @@ form {
 .nav a {
     color: #636262;
     font-family: Constantia, serif;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
-    margin-right: 45px;
+    margin-right: 70px;
     font-weight: bold;
 }
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #636969;
+    border-radius: 999px;
+    transition: width 0.25s ease, left 0.25s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: #636969;
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+    width: 100%;
+    left: 0;
+}
+
 
 .logout a {
     color: #b81414;
@@ -109,8 +132,19 @@ nav a:hover {
     text-decoration: underline;
 }
 
+.nav a {
+    position: relative;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 4px;
+    font-size: 1.200rem;
+    font-weight: 500;
+    transition: color 0.25s ease;
+}
+
 .pai {
-    background-color: #e2dad7;
+    background: linear-gradient(135deg, #e2dae3, #e2dad7);
+
     margin-block: 0.1px;
     border: 2px #636262 ;
     width: 100%;
