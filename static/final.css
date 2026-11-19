@@ -60,6 +60,20 @@ main {
     justify-content: center;
 }
 
+.titulos_listas {
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.titulos_cadastros {
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
 form {
     padding: 15px;
     width: 600px;
@@ -153,7 +167,6 @@ th {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-
 }
 
 .botao3 a {
@@ -168,11 +181,6 @@ th {
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
-
-.titulos_elementos {
-
 }
 
 button  {
@@ -189,7 +197,6 @@ button  {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-
 }
 
 .botao4 a {
@@ -197,6 +204,27 @@ button  {
     height: auto;
     background-color: #b81414;
     border-radius: 1px;
+    border: darkred;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_cadastros {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_cadastros a {
+    width: 100px;
+    height: 30px;
+    background-color: #b81414;
+    border-radius: 5px;
     border: darkred;
     color: white;
     text-align: center;

@@ -4,9 +4,10 @@
     <div class="botao4">
         <a href="{{ url_for('novo_equipamento') }}" class="botao">Cadastrar equipamentos</a>
     </div>
-    <h1>Equipamentos</h1>
     <section class="painel">
-        <h2>Lista dos equipamentos cadastrados</h2>
+        <div class="titulos_listas">
+           Lista dos Equipamentos Cadastrados
+        </div>
 
         {% if equipamentos %}
             <table>
