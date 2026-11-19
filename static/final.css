@@ -280,11 +280,17 @@ p {
     border-radius: 3px;
     margin-bottom: 10px;
     font-size: 0.9rem;
-    height: 50px;
-    width: 280px;
+    height: fit-content;
+    width: fit-content;
 }
 
 .flash-success {
+    background-color: #f2fff0;
+    color: black;
+    border: 1px solid darkolivegreen;
+}
+
+.flash-error {
     background-color: #ffecea;
     color: black;
     border: 1px solid #b81414;
