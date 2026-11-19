@@ -16,7 +16,12 @@
                 <br>
                 <div class="campo">
                     <label for="responsavel">Responsável</label>
-                    <input type="text" id="responavel" name="responsavel">
+                    <select id="responsavel" name="responsavel_id" required>
+                    <option value=""> Responsável</option>
+                        {% for responsavel in responsaveis %}
+                            <option value="{{ responsavel.id }}">{{ responsavel.nome }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <br>
                 <div class="campo">

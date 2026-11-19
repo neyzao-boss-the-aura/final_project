@@ -9,11 +9,11 @@
         </div>
         <form method="POST" action="{{ url_for('novo_equipamento', id_equipamento=editar.id) if editar else url_for('novo_equipamento') }}">
                     <label for="nome">Nome do equipamento</label>
-                    <input type="text" id="nome" name="nome" value="{{ editar.nome if editar else ''}}>
+                    <input type="text" id="nome" name="nome" value="{{ editar.nome if editar else ''}}">
                     <br>
 
                     <label for="quantidade">Quantidade de equipamentos</label>
-                    <input type="number" id="quantidade" name="quantidade" value="{{ editar.quantidade if editar else ''}}>
+                    <input type="number" id="quantidade" name="quantidade" value="{{ editar.quantidade if editar else ''}}">
                     <br>
 
                     <label for="nota_usuario">Nota do Usuário</label>
