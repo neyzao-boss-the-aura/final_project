@@ -88,14 +88,14 @@ def registro():
         senha = request.form.get("senha", "").strip()
 
         if not nome and not email and not senha :
-            flash("PREENCHA OS CAMPOS", "error")
+            flash("Preencha os campos", "error")
             return redirect (url_for("registro"))
 
         usuario_sql = select(Usuario).where (Usuario.email == email)
         usuario_email = db_session.execute(usuario_sql).scalars().all()
 
         if usuario_email:
-            flash("Email já cadastrado")
+            flash("E-mail já cadastrado")
             return redirect (url_for("registro"))
         try:
             novo_usuario = Usuario(
@@ -154,7 +154,7 @@ def novo_equipamento():
             flash('Por favor, insira a quantidade', 'error')
             return redirect(url_for("novo_equipamento"))
         if not nota_usuario:
-            flash('Deixe uma nota  ', 'error')
+            flash('Por favor, deixe uma nota do usuário', 'error')
             return redirect(url_for("novo_equipamento"))
 
         tabela_equipamentos.salvar(nome=nome, quantidade=quantidade, nota_usuario=nota_usuario)
@@ -177,11 +177,11 @@ def editar_equipamento(id_equipamento):
 
         # 2- Verificar se foi digitado
         if not nome:
-            flash("PREENCHA O NOME", "error")
+            flash("Preencha o nome", "error")
         elif not quantidade:
-            flash("PREENCHA A QUANTIDADE", "error")
+            flash("Preencha a quantidade", "error")
         elif not nota_usuario:
-            flash("PREENCHA A NOTA DO USUÁRIO", "error")
+            flash("Preencha a nota do usuário", "error")
         else:
             equipamento.nome = nome
             equipamento.quantidade = quantidade
@@ -207,7 +207,7 @@ def novo_recurso():
             flash('Por favor, insira o responsável pelo recurso', 'error')
             return redirect(url_for("novo_recurso"))
         if not descricao:
-            flash('Deixe uma nota de descrição', 'error')
+            flash('Por favor, deixe uma nota de descrição', 'error')
             return redirect(url_for("novo_recurso"))
 
         tabela_recurso.salvar(nome=nome, responsavel=responsavel, descricao=descricao)
@@ -230,11 +230,11 @@ def editar_recurso(id_recurso):
 
         # 2- Verificar se foi digitado
         if not nome:
-            flash("PREENCHA O NOME", "error")
+            flash("Preencha o nome", "error")
         elif not responsavel:
-            flash("PREENCHA O RESPONSÁVEL", "error")
+            flash("Preencha o responsável", "error")
         elif not descricao:
-            flash("PREENCHA A DESCRIÇÃO", "error")
+            flash("Preencha a descrição", "error")
         else:
             recurso.nome = nome
             recurso.responsavel = responsavel
@@ -263,16 +263,16 @@ def nova_ordem_servicos():
             flash('Por favor, insira a prioridade', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not estado:
-            flash('Por favor, selecione o status da OS', 'error')
+            flash('Por favor, selecione o status da Ordem de Serviço', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not data_abertura:
             flash('Por favor, insira a data de abertura', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not data_prazo:
-            flash('Digite a data do prazo', 'error')
+            flash('Por favor, insira a data do prazo', 'error')
             return redirect(url_for("nova_ordem_servicos"))
         if not descricao:
-            flash('Digite a descrição da OS', 'error')
+            flash('Por favor, digite a descrição da OS', 'error')
             return redirect(url_for("nova_ordem_servicos"))
 
         tabela_servico.salvar(responsavel=responsavel, prioridade=prioridade, estado=estado, data_abertura=data_abertura, data_prazo=data_prazo, descricao=descricao)
@@ -306,9 +306,9 @@ def editar_ordem_servicos(id_ordem_servico):
         if not data_abertura:
             flash('Por favor, insira a data de abertura', 'error')
         if not data_prazo:
-            flash('Digite a data do prazo', 'error')
+            flash('Por favor, insira a data do prazo', 'error')
         if not descricao:
-            flash('Digite a descrição da OS', 'error')
+            flash('Por favor, digite a descrição da OS', 'error')
         else:
             ordem_servico.responsavel = responsavel
             ordem_servico.prioridade = prioridade
@@ -334,22 +334,22 @@ def novo_funcionario():
         estado = request.form.get("estado", "").strip()
 
         if not nome:
-            flash('Por favor, insira o nome', 'error')
+            flash('Por favor, digite o nome do funcionário', 'error')
             return redirect(url_for("novo_funcionario"))
         if not email:
-            flash('Por favor, insira o email', 'error')
+            flash('Por favor, digite o e-mail', 'error')
             return redirect(url_for("novo_funcionario"))
         if not telefone:
             flash('Por favor, insira o telefone', 'error')
             return redirect(url_for("novo_funcionario"))
         if not endereco:
-            flash('Por favor, insira o endereco', 'error')
+            flash('Por favor, insira o endereço', 'error')
             return redirect(url_for("novo_funcionario"))
         if not contratado_em:
-            flash('Por favor, insira o contratado em', 'error')
+            flash('Por favor, insira a data do contrato', 'error')
             return redirect(url_for("novo_funcionario"))
         if not estado:
-            flash('Por favor, selecione o estado', 'error')
+            flash('Por favor, selecione o status', 'error')
             return redirect(url_for("novo_funcionario"))
 
         tabela_funcionario.salvar(nome=nome, email=email, telefone=telefone, endereco=endereco, contratado_em=contratado_em, estado=estado)
@@ -376,15 +376,15 @@ def editar_funcionarios(id_funcionario):
         if not nome:
             flash('Por favor, insira o nome', 'error')
         if not email:
-            flash('Por favor, insira o email', 'error')
+            flash('Por favor, insira o e-mail', 'error')
         if not telefone:
             flash('Por favor, insira o telefone', 'error')
         if not endereco:
-            flash('Por favor, insira o endereco', 'error')
+            flash('Por favor, insira o endereço', 'error')
         if not contratado_em:
-            flash('Por favor, insira o contratado em', 'error')
+            flash('Por favor, insira a data do contrato', 'error')
         if not estado:
-            flash('Por favor, selecione o estado', 'error')
+            flash('Por favor, selecione o status', 'error')
         else:
             funcionario.nome = nome
             funcionario.email = email
