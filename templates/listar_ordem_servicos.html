@@ -2,14 +2,14 @@
 
 {% block conteudo %}
 
-<div class="botao4">
-    <a href="{{ url_for('nova_ordem_servicos') }}" >Cadastrar Ordem de Serviço (OS)</a>
-</div>
+    <div class="botao4">
+    <a href="{{ url_for('nova_ordem_servicos') }}" >Cadastrar Ordem de Serviço</a>
+    </div>
+    <section class="painel">
+        <div class="titulos_listas">
+            Lista das Ordens de Serviços Cadastradas
+        </div>
 
-<h1> Ordem de serviço </h1>
-
-<section class="painel">
-        <h2>Lista das OS's cadastradas </h2>
         {% if ordem_servicos %}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
@@ -21,7 +21,6 @@
                         <th>Estado</th>
                         <th>Data Abertura</th>
                         <th>Data Prazo</th>
-                        <th>Descricão</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -34,7 +33,6 @@
                                 <td>{{ ordem_servico.estado }}</td>
                                 <td>{{ ordem_servico.data_abertura }}</td>
                                 <td>{{ ordem_servico.data_prazo }}</td>
-                                <td>{{ ordem_servico.descrição }}</td>
                                 <td>
                                     <a href="">Editar </a>
                                 </td>
@@ -43,7 +41,7 @@
                     </tbody>
             </table>
         {% else %}
-            <p class="vazio">Nenhuma OS cadastrada ainda</p>
+            <p> Nenhuma Ordem de Serviço Cadastrada ainda </p>
         {% endif %}
 </section>
 

@@ -2,18 +2,14 @@
 
 {% block conteudo %}
     <div class="botao4">
-        <a href="{{ url_for('novo_recurso') }}" >Cadastrar recurso</a>
+        <a href="{{ url_for('novo_recurso') }}" >Cadastrar Recursos</a>
     </div>
-    <div class="cabecalho-pagina">
-        <div>
-            <h1>Recursos</h1>
-            <p class="subtitulo"></p>
-        </div>
-    </div>
-
     {% if request.endpoint == 'listar_recursos' %}
     <section class="painel">
-        <h2>Lista dos recursos cadastrados </h2>
+        <div class="titulos_listas">
+            Lista dos Recursos Cadastrados
+        </div>
+
         {% if recursos %}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
@@ -41,7 +37,7 @@
                     </tbody>
             </table>
         {% else %}
-            <p class="vazio">Nenhum recurso cadastrado ainda</p>
+            <p> Nenhum Recurso Cadastrado ainda </p>
         {% endif %}
     </section>
 

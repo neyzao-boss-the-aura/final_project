@@ -233,3 +233,10 @@ button  {
     justify-content: center;
     align-items: center;
 }
+
+p {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}

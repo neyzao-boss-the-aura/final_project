@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-<div class="cabecalho-pagina">
-</div>
     {% if request.endpoint == 'novo_equipamento' or request.endpoint == 'editar_equipamento '%}
     <section class="painel formulario">
         <div class="titulos_cadastros">
-            Novo Equipamento
+            Cadastro de Equipamento
         </div>
         <form method="POST" action="{{ url_for('novo_equipamento', id_equipamento=editar.id) if editar else url_for('novo_equipamento') }}">
-                    <label for="nome">Nome do equipamento</label>
-                    <input type="text" id="nome" name="nome" value="{{ editar.nome if editar else ''}}>
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" value="{{ editar.nome if editar else ''}}">
                     <br>
 
-                    <label for="quantidade">Quantidade de equipamentos</label>
-                    <input type="number" id="quantidade" name="quantidade" value="{{ editar.quantidade if editar else ''}}>
+                    <label for="quantidade">Quantidade</label>
+                    <input type="number" id="quantidade" name="quantidade" value="{{ editar.quantidade if editar else ''}}">
                     <br>
 
                     <label for="nota_usuario">Nota do Usuário</label>
-                    <input type="text" id="nota_usuario" name="nota_usuario" value="{{ editar.nota_usuario if editar else ''}}">
+                    <textarea name="nota_usuario" id="nota_usuario" value="{{ editar.nota_usuario if editar else ''}}" rows="10" cols="10"> </textarea>
                     <br>
 
                     <button type="submit" class="botao_cadastros"> Cadastrar </button>
                     <div class="botao3">
-                        <a href="{{ url_for('novo_equipamento') }}" class="botao botao-secundario">Cancelar</a>
+                        <a href="{{ url_for('novo_equipamento') }}">Cancelar</a>
                     </div>
         </form>
     </section>
     <br>
     {% if not editar %}
-    <a href="{{ url_for('listar_equipamentos') }}" class="botao"> Listar equipamentos </a>
+    <div class="botao4">
+        <a href="{{ url_for('listar_equipamentos') }}"> Listar Equipamentos </a>
+    </div>
     {% endif %}
     {% endif %}
 {% endblock conteudo %}
