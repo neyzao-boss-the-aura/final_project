@@ -1,70 +1,60 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<div class="cabecalho-pagina">
-        <div>
-            <h1>Ordem de serviço</h1>
-            <p class="subtitulo"></p>
-        </div>
-</div>
-
     {% if request.endpoint == 'nova_ordem_servicos' %}
     <section class="painel formulario">
-        <h2>Nova Ordem de Serviço</h2>
+        <div class="titulos_cadastros">
+            Cadastro de Ordem de Serviço
+        </div>
         <form method="POST" action="{{ url_for('nova_ordem_servicos') }}">
-            <div class="linha-campos">
-                <br>
-                <div class="campo">
-                    <label for="responsavel">Responsável</label>
+                    <label for="responsavel">Responsável da OS</label>
                     <select id="responsavel" name="responsavel_id" required>
                     <option value=""> Responsável</option>
                         {% for responsavel in responsaveis %}
                             <option value="{{ responsavel.id }}">{{ responsavel.nome }}</option>
                         {% endfor %}
                     </select>
-                </div>
-                <br>
-                <div class="campo">
+                    <br>
+
                     <label for="prioridade">Prioridade</label>
                     <select id="prioridade" name="prioridade">
-                        <option> Alta </option>
-                        <option> Média </option>
                         <option> Baixa </option>
+                        <option> Média </option>
+                        <option> Alta </option>
                     </select>
-                </div>
-                <br>
-                <div class="campo">
-                    <label for="estado">Estado</label>
+                    <br>
+
+                    <label for="estado">Status</label>
                     <select id="estado" name="estado">
-                        <option> Concluído </option>
-                        <option> Em processo </option>
                         <option> Não iniciado </option>
+                        <option> Em processo </option>
+                        <option> Concluído </option>
                     </select>
-                </div>
-                <br>
-                <div class="campo">
-                    <label for="data_abertura">Início</label>
+                    <br>
+
+                    <label for="data_abertura"> Data de Abertura </label>
                     <input type="date" id="data_abertura" name="data_abertura">
-                </div>
-                <br>
-                <div class="campo">
+                    <br>
+
                     <label for="data_prazo">Prazo</label>
                     <input type="date" id="data_prazo" name="data_prazo">
-                </div>
-                <br>
-                <div class="campo">
+                    <br>
+
                     <label for="descricao"> Descrição </label>
                     <input type="text" id="descricao" name="descricao">
-                </div>
-            </div>
-                <br>
-                    <button type="submit" class="botao">Cadastrar</button>
-                    <a href="{{ url_for('nova_ordem_servicos') }}" class="botao botao-secundario">Cancelar</a>
+                    <br>
+
+                    <button type="submit" class="botao_cadastros">Cadastrar</button>
+                    <div class="botao3">
+                        <a href="{{ url_for('nova_ordem_servicos') }}">Cancelar</a>
+                    </div>
         </form>
     </section>
     <br>
     {% if not editar %}
-    <a href="{{ url_for('listar_ordem_servicos') }}" class="botao"> Listar ordem de serviço (OS)</a>
+    <div class="botao4">
+        <a href="{{ url_for('listar_ordem_servicos') }}"> Listar Ordem de Serviço</a>
+    </div>
     {% endif %}
     {% endif %}
 {% endblock conteudo %}

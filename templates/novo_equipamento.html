@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-<div class="cabecalho-pagina">
-</div>
     {% if request.endpoint == 'novo_equipamento' or request.endpoint == 'editar_equipamento '%}
     <section class="painel formulario">
         <div class="titulos_cadastros">
@@ -17,19 +15,19 @@
                     <br>
 
                     <label for="nota_usuario">Nota do Usuário</label>
-                    <input type="text" id="nota_usuario" name="nota_usuario" value="{{ editar.nota_usuario if editar else ''}}">
+                    <textarea name="nota_usuario" id="nota_usuario" value="{{ editar.nota_usuario if editar else ''}}" rows="10" cols="10"> </textarea>
                     <br>
 
                     <button type="submit" class="botao_cadastros"> Cadastrar </button>
                     <div class="botao3">
-                        <a href="{{ url_for('novo_equipamento') }}" class="botao botao-secundario">Cancelar</a>
+                        <a href="{{ url_for('novo_equipamento') }}">Cancelar</a>
                     </div>
         </form>
     </section>
     <br>
     {% if not editar %}
     <div class="botao4">
-        <a href="{{ url_for('listar_equipamentos') }}" class="botao4"> Listar equipamentos </a>
+        <a href="{{ url_for('listar_equipamentos') }}"> Listar Equipamentos </a>
     </div>
     {% endif %}
     {% endif %}

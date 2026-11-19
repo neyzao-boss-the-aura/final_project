@@ -1,40 +1,35 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-    <div class="cabecalho-pagina">
-    </div>
 {% if request.endpoint == 'novo_recurso' %}
     <section class="painel formulario">
         <div class="titulos_cadastros">
-            Novo Recurso
+            Cadastro de Recurso
         </div>
         <form method="POST" action="{{ url_for('novo_recurso') }}">
-            <div class="linha-campos">
-                <div class="campo">
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="nome">
-                </div>
-                <br>
-                <div class="campo">
+                    <br>
+
                     <label for="responsavel">Responsável</label>
                     <input type="text" id="responsavel" name="responsavel">
-                </div>
-                <br>
-                <div class="campo">
+                    <br>
+
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao">
-                </div>
-            </div>
-            <br>
-                <div class="acoes-form">
-                    <button type="submit" class="botao">Cadastrar </button>
-                    <a href="{{ url_for('novo_recurso') }}" class="botao botao-secundario">Cancelar</a>
-                </div>
+                    <textarea name="nota_usuario" id="nota_usuario" value="{{ editar.nota_usuario if editar else ''}}" rows="10" cols="30"> </textarea>
+                    <br>
+
+                    <button type="submit" class="botao_cadastros">Cadastrar </button>
+                    <div class="botao3">
+                       <a href="{{ url_for('novo_recurso') }}">Cancelar</a>
+                    </div>
         </form>
     </section>
     <br>
     {% if not editar %}
-    <a href="{{ url_for('listar_recursos') }}" class="botao"> Listar recursos </a>
+    <div class="botao4">
+        <a href="{{ url_for('listar_recursos') }}"> Listar Recursos </a>
+    </div>
     {% endif %}
 {% endif %}
 {% endblock conteudo %}
