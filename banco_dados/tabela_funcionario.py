@@ -23,7 +23,7 @@ def salvar(nome, email, telefone, endereco, contratado_em, estado):
         novo_funcionario = Funcionario(nome=nome, email=email, telefone=telefone, endereco=endereco, contratado_em=contratado_em, estado=estado)
         db_session.add(novo_funcionario)
         db_session.commit()
-        flash("Usuario criado com sucesso", "success")
+        flash("Funcionário criado com sucesso", "success")
         return novo_funcionario
     except SQLAlchemyError as e:
         db_session.rollback()

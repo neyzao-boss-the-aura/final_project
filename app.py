@@ -207,7 +207,7 @@ def novo_recurso():
             flash('Por favor, insira o responsável pelo recurso', 'error')
             return redirect(url_for("novo_recurso"))
         if not descricao:
-            flash('Deixe uma nota de descrição (Não obrigatório)', 'error')
+            flash('Deixe uma nota de descrição', 'error')
             return redirect(url_for("novo_recurso"))
 
         tabela_recurso.salvar(nome=nome, responsavel=responsavel, descricao=descricao)
