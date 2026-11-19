@@ -2,14 +2,16 @@
 
 {% block conteudo %}
 
-<div class="botao4">
-    <a href="{{ url_for('novo_funcionario') }}" class="botao">Cadastrar funcionário</a>
-</div>
+    <div class="botao4">
+        <a href="{{ url_for('novo_funcionario') }}" class="botao">Cadastrar Funcionário</a>
+    </div>
 
-<h1>Funcionários</h1>
-{% if request.endpoint == 'listar_funcionarios' %}
-<section class="painel">
-        <h2>Lista dos funcionários cadastrados </h2>
+    {% if request.endpoint == 'listar_funcionarios' %}
+    <section class="painel">
+        <div class="titulos_listas">
+            Lista dos Funcionários Cadastrados
+        </div>
+
         {% if funcionarios %}
             <table>
     <!-- "thead" serve como cabeçalho e "tbody" como informação-->
@@ -46,7 +48,7 @@
         {% else %}
             <p> Nenhum Funcionário Cadastrado ainda </p>
         {% endif %}
-</section>
+    </section>
 {% endif %}
 {% if not editar %}
 
